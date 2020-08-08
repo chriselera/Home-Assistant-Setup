@@ -3,7 +3,7 @@
 
 <h4>Server</h4>
 <ul>
-  <li>NUC with i5-8400H, 8MB DDR4 2666 MHz RAM, 2 NVMe SSD drives (128GB and 500GB)</li>
+  <li>Intel i5-8400H NUC with 8MB DDR4 2666 MHz RAM, 2 NVMe SSD drives (128GB and 500GB)</li>
   <li>Linux Mint 20 "Ulyana" - Cinnamon (64-bit)</li>
   <li>VirtualBox 6.1</li>
   <li>HassOS 4.12</li>
