@@ -1,5 +1,36 @@
 # Home-Assistant-Setup
+<h3>Setup</h3>
 
+<h4>Server</h4>
+<ul>
+  <li>NUC with i5-8400H, 8MB DDR4 2666 MHz RAM, 2 NVMe SSD drives (128GB and 500GB)</li>
+  <li>Linux Mint 20 "Ulyana" - Cinnamon (64-bit)</li>
+  <li>VirtualBox 6.1</li>
+  <li>HassOS 4.12</li>
+  <li>dresden elektronik ConBee II Zigbee USB Gateway</li>
+  <li>Aeotec Z-Stick Gen5</li>
+  <li>Wyze Sense Bridge</li>
+</ul>  
+
+<h4>Zigbee Devices</h4>
+<ul>
+  <li>Aqara Tuneable White Smart Bulb ZNLDP12LM</li>
+  <li>eWeLink ZigBee Smart Plug SA-003</li>
+  <li>Aqara Temperature, Humidity, and Atmospheric Pressure Sensor WSDCGQ11LM</li>
+</ul>
+
+<h4>Zwave Devices</h4>
+<ul>
+  <li>Schlage Connect Smart Deadbolt Z-wave Plus BE469</li>
+  <li>Remotec ZRC-90</li>
+</ul>
+
+<h4>Others</h4>
+<ul>
+  <li>Broadlink RM Pro</li>
+  <li>Wyze Cam Pan, Cam V2, and Contact and Motion Sensors</li>
+  <li>Google Home</li>
+</ul>
 
 <h3>Screenshots</h3>
 
