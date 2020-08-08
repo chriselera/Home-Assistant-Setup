@@ -1,0 +1,956 @@
+switch:
+  - platform: broadlink
+    host: xxx.xxx.xxx.xxx
+    mac: 'xx:xx:xx:xx:xx:xx'
+    timeout: 15
+    #retry: 5
+    switches:
+#      lgtv:
+#        friendly_name: "LG TV"
+#        command_on: 'JgBgAAABJ5UTEhITEjgTEhMSExMTEhMSEjgTNxMSEjgTNhI4EjgTNxITExITEhQ2ExIUEhMSExISOBM3EzYTExI3EjgTNxM2FAAFNQABKUkTAAxPAAEoShMADE4AASlKEgANBQAAAAAAAAAA'
+#        command_off: 'JgBgAAABJ5UTEhITEjgTEhMSExMTEhMSEjgTNxMSEjgTNhI4EjgTNxITExITEhQ2ExIUEhMSExISOBM3EzYTExI3EjgTNxM2FAAFNQABKUkTAAxPAAEoShMADE4AASlKEgANBQAAAAAAAAAA'
+      ac_livingroom:
+        friendly_name: "Living Room Aircon"
+        command_on: 'JgBAAGwAAUETMhIREREREREyEhASEBIQEREREREREREREREQEhASEBIyEREREREzEjIREREyExARERERETISMhIADQUAAAAAAAAAAA=='
+        command_off: 'JgBAAGYAAUYQNA8TDxMREQ81DxIREQ8TDzUPNRASEBIPEw8TDxMPEw8TDxMPEw8SEBIPNQ8TDzUQEg8TDxMPNQ8ADQUAAAAAAAAAAA=='
+      light_office_ceiling:
+        friendly_name: "Office Ceiling Light"
+        command_on: '6RRGAN8JFgkJFhYJCRYJFgkWFgkJFhYJCRYJFgkWFgkJFhYJCRYWCQkWCRYJFhYJFgkWCQkWFgkWCRYJCRYJFgkWCRYJFgkAAUg='
+        command_off: '6RRGAN8JFgkJFhYJFgkJFhYJFgkJFgkWCRYJFgkWFgkJFhYJCRYWCQkWFgkWCQkWCRYJFgkWCRYWCQkWFgkJFgkWFgkWCQkAAUg='
+      light_bedroom_ceiling:
+        friendly_name: "Bedroom Ceiling Light"
+        command_on: '6RRGAN8JFgkWCQkWCRYWCQkWFgkWCRYJCRYWCRYJFgkJFhYJFgkWCQkWCRYJFgkWFgkWCRYJFgkJFgkWCRYWCQkWCRYWCQkAAUg='
+        command_off: '6RRGAN8JFgkWCQkWCRYJFhYJCRYWCRYJFgkWCQkWFgkWCRYJCRYWCQkWCRYWCQkWFgkWCQkWFgkWCQkWCRYJFgkWCRYWCQkAAUg='
+      light_kitchen_ceiling:
+        friendly_name: "Kitchen Ceiling Light"
+        command_on: '6RRGAN8JFgkJFhYJFgkJFhYJFgkJFgkWCRYWCRYJCRYJFgkWFgkWCQkWCRYJFgkWFgkWCQkWCRYWCQkWFgkWCQkWFgkJFgkAAUg='
+        command_off: '6RRGAN8JCRYJFgkWCRYJFhYJCRYJFgkWCRYWCQkWFgkWCRYJFgkWCRYJCRYWCRYJFgkJFhYJFgkWCRYJFgkJFgkWFgkWCQkAAUg='
+      light_kitchen_wall:
+        friendly_name: "Kitchen Wall Light"
+        command_on: '6RRGAN8JFgkWCRYJFgkJFhYJCRYJFhYJFgkJFgkWFgkWCRYJCRYWCQkWCRYJFhYJFgkJFhYJFgkWCQkWCRYWCQkWFgkJFgkAAUg='
+        command_off: '6RRGAN8JFgkJFhYJCRYJFhYJCRYJFhYJFgkWCQkWFgkJFgkWFgkWCRYJFgkJFhYJFgkJFgkWFgkWCQkWCRYWCRYJFgkWCQkAAUg='
+      fan_livingroom:
+        friendly_name: "Living Room Fan"
+        command_on: "JgAKASsMKA8NKyoNKA8NKw8pDSkNKhAoDygr5ysNKA8NKisMKBANKw8nECgPKA8pDigr6CsMKA8NKyoNKA8NKw8oDygQJxAoDygr5ysNKA8OKSsMKQ8PKBAnECgPKA8oECcp7CsNKA8NKyoMKQ8NKhAnECgPKA8oECcr6ysMKQ8OKicPKBAMLA4oDSoQKA8oECcr6yoNKA8NKisNKA8NKhAoDygPKBAnECcr6ysMKA8PKCsNKA8NKhAoDygPKBAnECgq6ysNKA8PKSoMKQ8PKBAnECgMKw8oECcr6isMKQ8NKisMKBAOKQ8oECcQKA8oECcr6ysMKA8PKCsNKA8QJxAoDygPKBAnECgrAA0FAAAAAAAAAAAAAAAAAAA="
+        command_off: "JgAKASsMKA8NKyoNKA8NKw8pDSkNKhAoDygr5ysNKA8NKisMKBANKw8nECgPKA8pDigr6CsMKA8NKyoNKA8NKw8oDygQJxAoDygr5ysNKA8OKSsMKQ8PKBAnECgPKA8oECcp7CsNKA8NKyoMKQ8NKhAnECgPKA8oECcr6ysMKQ8OKicPKBAMLA4oDSoQKA8oECcr6yoNKA8NKisNKA8NKhAoDygPKBAnECcr6ysMKA8PKCsNKA8NKhAoDygPKBAnECgq6ysNKA8PKSoMKQ8PKBAnECgMKw8oECcr6isMKQ8NKisMKBAOKQ8oECcQKA8oECcr6ysMKA8PKCsNKA8QJxAoDygPKBAnECgrAA0FAAAAAAAAAAAAAAAAAAA="
+      tv_backlight_livingroom:
+        friendly_name: "Living Room TV Backlight"
+        command_on: "sgA4AQ0pKBANKQ0pDCkpDykPDigpEA0oKRAoEA0pKBAoEA0pDCkNKQ0pDCkNKQ0pKBApDw0AAZANKCkQDSgNKQ0pKBApDw0pKQ8NKSkPKQ8NKSkPKQ8NKQ0pDSkNKA0pDSkNKCkQKBANAAGPDSkpDw0pDSkNKCkQKBANKSgQDSgpECkPDSkoECkPDSkNKQ0oDSkNKQ0oDSkpDykQDQABjw0pKBANKQwpDSkpDykQDSgpEA0oKRApDw0pKBApDw0pDSkNKA0pDSkNKA0pKQ8pDw0AAZANKSkPDSkMKQ0pKQ8pEAwpKRANKCkQKQ8NKCkQKBANKQ0pDSkMKQ0pDCkNKSkQKA8NAAGQDSkoEA0pDSgNKSkPKRANKCkQDCkpECkPDSkoECgQDSkNKQwpDSkNKQ0oDSkpDykQDAAF3A=="
+        command_off: "sgY0AA0qKhANKg4pDikqECkQDikqEA4qKRApEA4qKRAqEA0qDioOKQ0qDioOKQ4pDioqEA4AAZAAAAAA"
+      cignal_livingroom:
+        friendly_name: "Living Room Cignal"
+        command_on: "JgCAAFkcEA0QDREaERstGxANEQ0QDRENEA0RDg8NIBsgGyAMERsRDREMIBsRDSANEA0RGxANEQ0QDSANEBwQDRAACThZGxANEQ0QGxAcLBsRDRANEQ0QDRENEA0RDR8bIBsgDRAcEA0RDR8cEA0gDRANERsQDRENEA0gDREbEA0RAA0FAAAAAAAAAAA="
+        command_off: "JgCAAFkcEA0QDREaERstGxANEQ0QDRENEA0RDg8NIBsgGyAMERsRDREMIBsRDSANEA0RGxANEQ0QDSANEBwQDRAACThZGxANEQ0QGxAcLBsRDRANEQ0QDRENEA0RDR8bIBsgDRAcEA0RDR8cEA0gDRANERsQDRENEA0gDREbEA0RAA0FAAAAAAAAAAA="
+      dvd_livingroom:
+        friendly_name: "Living Room DVD"
+        command_on: "JgBYAAABKZEVEBMSFBEUERMSExEVEBMTEzYTNhU2EzYUNhQ2EzYUNhU1FDYUNRUQFDYUERQRExEVEBQSExEVNRQRFDYTNhQ2FAAFHAABKUgTAAxRAAEoSBQADQU="
+        command_off: "JgBYAAABKZEVEBMSFBEUERMSExEVEBMTEzYTNhU2EzYUNhQ2EzYUNhU1FDYUNRUQFDYUERQRExEVEBQSExEVNRQRFDYTNhQ2FAAFHAABKUgTAAxRAAEoSBQADQU="
+      soundbar_livingroom:
+        friendly_name: "Living Room Soundbar"
+        command_on: "JgBWAJaTFRETEhU1FDUVERQ1FBEVERUQFRAVNRU1FBEUNhUQFRAUEhQ1FTUVNRQ2FBEUERUQFTUUERQRFBIUERQ2FTQVNRQABgOVlBM2FQAMXpaSFTUUAA0FAAA="
+        command_off: "JgBWAJaTFRETEhU1FDUVERQ1FBEVERUQFRAVNRU1FBEUNhUQFRAUEhQ1FTUVNRQ2FBEUERUQFTUUERQRFBIUERQ2FTQVNRQABgOVlBM2FQAMXpaSFTUUAA0FAAA="
+
+script:
+  remote_fan_speed_up:
+    alias: Remote Fan Speed+
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgDaACkPKwwOKSgQKwwsDAwrDSoOKQ4qKA8r6CgPKwwNKycQKwwsDA0qDSoOKg0qKA8s5ygPKwwOKigPKwwsDA0qDSoOKg0qKA8s5ykOLAsNKygPKw0rDAwrDikOKg0qKQ4s6SgQKwwOKSgQKwwsCw4qDSoOKQ4qKA8r6igPLAsOKigPLAssDA0qDikOKg0qKQ4s6SgPKw0NKigPKw0rDA4pDioNKg0qKA8r6igPLAwNKigPKw0rDA0qDioNKg0qKQ4s6ioNLAsOKigPKw0rDAwsDSoMKw0qKA8rAA0FAAAAAAAAAAAAAAAAAAA=
+      service: broadlink.send
+  remote_fan_speed_down:
+    alias: Remote Fan Speed-
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgAEASsMKg0OKigPKg0sDAwrDSoOKSkPKg0PAAEEKA8rDA4qKA8qDSsNDygNKg4pKBAqDQ8AAQMpDyoNDikpDysMKw0PKA0qDikoECoNDgABBCgQKg0OKSkOLAwqDQ8pDSoNKikOKw0PAAEFKA8rDA4pKBAqDSsNDSoNKg4pKBAqDQ4AAQYpDisNECcpDiwMKwwNKg4qDSopDisMDQABBygQKwwMKygPLAwrDA4pDioNKigPLAwNAAEHKQ4sDA0qKA8sDCsMDSoOKg0qKQ4sCw0AAQgpDisMDSsoDysMLAwMKw0qDiooDysMDgABCCkOKwwPKSgPKwwsDAwrDikOKigPKwwOAA0FAAAAAA==
+      service: broadlink.send
+  remote_fan_osc:
+    alias: Remote Fan Osc
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgDqACgQKwwNKikPKwwQJw4qKA8PKA4qDSoNAAEFKQ8rDA4pKBArDBAnDiooDxAoDSoNKg4AAQUoDysMDikpDyoNECgNKigPECcOKg0qDgABBSgPKwwOKSkPKwwQKA0qKQ4PKA4qDSoOAAEHKQ8rDA0qKBAqDQ8oDiooDxAnDioNKg0AAQkpDiwMDSooDywMECcNKikPDygMKw4pDgABCCgPKw0PKCgPLAwQJw4pKQ8QJw0qDioNAAEIKA8sDAwrKA8rDRAnDSooDxEnDSoNKg4AAQgpDysMDCspDiwMECcOKSkPDygNKg4qDQANBQAAAAAAAAAAAAAAAAAA
+      service: broadlink.send
+  remote_soundbar_volume_up:
+    alias: Remote Soundbar Volume+
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgBOAJOWFBESExI4EjgSExI4EhMSExIUEhMSOBI3EhQSNxIUEhMSOBI3EjgSExI4EhMSExMTEhMSExIUEjcSFBI3EjgSOBIABgaTlhI3EgANBQAAAAAAAAAAAAA=
+      service: broadlink.send
+  remote_soundbar_volume_down:
+    alias: Remote Soundbar Volume-
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgBOAJOWEhMSExI4EjgSExI4EhMSFBITEhMSOBI4EhMSOBITEhQSExI4EjcTExI4EhMSExIUEjcSFBITEjgSExI4EjgSNxIABgaTlRI4EgANBQAAAAAAAAAAAAA=
+      service: broadlink.send
+  remote_soundbar_mute:
+    alias: Remote Soundbar Mute
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgBOAJOWEhMSFBI3EjgSFBI3EhQSExITEhMSOBI4EhMSOBITEhQSNxI4EjgSNxM3EhQSExITEhMTExITEhMSFBI3EjgSOBIABgWTlhI3EgANBQAAAAAAAAAAAAA=
+      service: broadlink.send
+  remote_soundbar_woofer_up:
+    alias: Remote Soundbar Woofer+
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgBOAJSVExMSExI4EjgSExI4EhMSFBITEhMSOBI4EhMSOBITEhMSExM3EhQSNxIUEhMSNxM3EjgSExI4EhMSOBI4EhMSExIABgWTlRI4EgANBQAAAAAAAAAAAAA=
+      service: broadlink.send
+  remote_soundbar_woofer_down:
+    alias: Remote Soundbar Woofer-
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgBOAJOWEhMSExI4EjgSExI4EhMSExIUEhMSOBI4EhMSOBITEhMSOBITEhQSNxIUEhMSOBI3EhQSNxI4EhMSOBI4EhMSExIABgWUlRI4EQANBQAAAAAAAAAAAAA=
+      service: broadlink.send
+  remote_backlight_bright_up:
+    alias: Remote Backlight Bright Up
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: sgDQAAwqKBAMKgwqDCkoECkQDCooEAwqKBAoEA0pKBEoEAwqDCkNKQwqDCoMKSkQKBAMKgwAAZEMKigQDCkNKQwqKBAoEQwqKBAMKigQKBAMKigQKBAMKg0pDCoMKgwpDCooECgQDSkMAAGRDCooEA0pDCoMKSkQKBAMKigQDCooECgRDConESgQDCkNKQ0pDCoMKgwpKRAoEAwqDAABkQwpKRAMKQ0pDCooECgQDSkoEQwpKBApEAwqJxEoEAwqDCoMKQwqDCoMKigQKBAMKgwABdwAAAAAAAAAAA==
+      service: broadlink.send
+  remote_backlight_bright_down:
+    alias: Remote Backlight Bright Down
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: sgDQAAwpKRAMKQ0pDSkoECkQDCkpEAwqKBAoEA0pKBAoEQwpDSkMKgwqDCkNKSgQDSkNKQwAAZEMKigQDCoMKgwpKRAoEAwqKBANKSgQKBANKSgRKBAMKgwpDSkMKgwqDCkpEAwpDCoMAAGRDCooEAwqDCoMKSgRKBAMKigQDSkoECkQDConESgQDSkMKgwqDCkNKQwqKBAMKgwpDQABkA0pKRAMKQ0pDSkoEScQDSonEQwqKBAoEAwqKBApEAwqDCkNKQwqDCkNKSkQDCkNKQ0ABdwAAAAAAAAAAA==
+      service: broadlink.send
+  remote_backlight_color_next:
+    alias: Remote Backlight Color Next
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: sgAEAQwqKBANKQwqDCkpECgQDCooEA0pKBAoEA0pKBApEAwqDCkNKQwqDCkpEAwpDSkoEQwAAZANKSgQDCoMKgwqJxEoEAwqKBAMKigQKBANKSgQKRAMKgsqDCoMKgwpKRAMKQwqKBANAAGQDSkoEAwqDCoMKSkQKBAMKigQDCooECgRDCkoESgQDCoMKQ0pDCoMKigQDCoMKSkQDAABkQwpKBELKgwqDCooECgQDCooEA0pKBApEAwpKRAoEAwqDCoMKQ0pDCooEAwqDCooEAwAAZEMKSkQDCkMKgwqKBApEAwpKRAMKigQKBAMKigQKQ8MKg0pDCoMKgwpKBEMKQ0pKBANAAXcAAAAAA==
+      service: broadlink.send
+  remote_backlight_color_prev:
+    alias: Remote Backlight Color Prev
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: sgk0AA0qKRENKg0qDSopESkRDSopEQ0qKREpEQwrKBEpEQ0qDCoNKg0qDSoNKikRKREoEQ0AAZEAAAAA
+      service: broadlink.send
+  remote_backlight_mode:
+    alias: Remote Backlight Mode
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: sgY0AA0qKRANKg0qDSopECkQDSopEQ0qKREpEA0qKRApEA0qDSoNKg0qDSopEA0qKRApEA0AAZEAAAAA
+      service: broadlink.send
+  remote_backlight_light_blue:
+    alias: Remote Backlight Light Blue
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: sgDQAAwpKRAMKQ0pDSkoECgQDSkpDw0pKBApEAwpKRAoEA0pDCkNKQ0pKBANKQwpDSkNKQ0AAZAMKSkQDCkNKQ0pKBAoEA0pKRAMKSkQKBAMKSkQKBANKQwpDSkNKSgQDSkMKQ0pDSkMAAGRDCkpDw0pDSkNKSgQKQ8NKSkPDSkoECkQDCkpDykQDCkNKQ0pDSkoEA0pDCoMKQ0pDQABkAwpKRAMKQ0pDSkoECgQDSkpEAwpKRAoEAwpKRAoEAwqDCoMKQ0pKBANKQwqDCkNKQwABdwAAAAAAAAAAA==
+      service: broadlink.send
+  remote_backlight_white:
+    alias: Remote Backlight White
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: sgAEAQwpKRAMKQ0pDCooECgRDCkoEQwpKRAnEQwqKBAoEAwqDCoMKQwqKBANKQwqDCooEAwAAZEMKSgQDSkMKgwqKBAoEAwqKBANKSgQKBEMKSgQKRAMKgwpDSkNKSgQDCoMKQ0pKBANAAGQDCooEAwqDCkNKSgQKRAMKigQDCooECgQDSkoECgQDSkMKgwqDCkoEA0pDCoMKigQDAABkQwpKRAMKQwqDCooECgRDCkoEQwpKBApEAwqKA8pEAwqDCkMKg0pKBAMKgwpDSkoEQwAAZANKSgQDSkNKQwpKRAoEAwqKBAMKigQKBEMKSgRJxEMKgwpDSkNKSgQDSkMKQ0pKQ8NAAXcAAAAAA==
+      service: broadlink.send
+  remote_backlight_yellow:
+    alias: Remote Backlight Yellow
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: sgY0AA0qKRENKg0qDSopESkRDSopEQ0qKREpEQ0qKRApEQ0qDSoNKg0qKRANKg0qKRANKg0AAZEAAAAA
+      service: broadlink.send
+  remote_backlight_red:
+    alias: Remote Backlight Red
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: sgDQAAwqKBAMKgwpDSkoECkQDCkpEAwpKRAoEA0pKBApDw0pDSkMKgwpKQ8NKQ0pKBApEAwAAZANKSgQDSkNKQwpKRAoEA0pKBANKSgQKQ8NKSkQKBAMKgwpDSkMKigQDSkMKigQKBAMAAGRDCooEAwpDSkNKSgQKRAMKSkQDCkpECgQDSkoECgRDCkNKQwqDCkpEAwpDSkpDykQDAABkA0pKBANKQ0pDCooECgQDCopDw0pKBApEAwpKRAoEA0pDCkNKQ0pKQ8NKQwqKBAoEA0ABdwAAAAAAAAAAA==
+      service: broadlink.send
+  remote_backlight_blue:
+    alias: Remote Backlight Blue
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: sgDQAA0oKRANKA0pDSkpDykPDSkpEA0oKRAoEA0pKBApDw0pDSkNKQwpKRAMKSkQDCkNKQ0AAZANKSgQDCoMKQ0pKQ8pDw0qKBANKSkPKQ8NKSkPKRAMKQ0pDSkNKSgQDSgpEA0pDSgNAAGQDSkpDw0pDCkNKSkQKBAMKigQDSkpDykPDSkpDykQDCoMKQ0pDSkoEA0pKBANKQwpDQABkA0pKQ8NKQ0pDCkpECgQDSkpDw0pKQ8pEAwpKQ8pEA0pDSgNKQ0pKQ8NKSkPDSkNKQ0ABdwAAAAAAAAAAA==
+      service: broadlink.send
+  remote_backlight_green:
+    alias: Remote Backlight Green
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: sgY0AA0qKRENKg0qDiopESkRDSspEQ0qKREpEA0qKRApEQ0qDSoNKg0qKRENKikRDSopEA0AAZEAAAAA
+      service: broadlink.send
+  remote_aircon_temp_up:
+    alias: Remote Aircon Temp Up
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgBAAGsAAUMSMhIREREREREyEhEREREREBIQExEQEhERMhIQERIREREyEhASMhIQETMRERIxERMRMhIyEhASEBIADQUAAAAAAAAAAA==
+      service: broadlink.send
+  remote_aircon_temp_down:
+    alias: Remote Aircon Temp Down
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgBAAGwAAUISMhIREREREBIzERASEBIQEhARERERERERMhIQEhEQEhAzExASEBIQEjISEBIyEhASMhEREDQSEBIADQUAAAAAAAAAAA==
+      service: broadlink.send
+  remote_aircon_fan_speed:
+    alias: Remote Aircon Fan Speed
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgBAAGwAAUISMhIREREREBIyEhASEBATERASEBIQEhASMhIQEBISEBIyEhASEBIQEhASMhIQEREREREzEREREREADQUAAAAAAAAAAA==
+      service: broadlink.send
+  remote_aircon_jet_mode:
+    alias: Remote Aircon Jet Mode
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgBAAGgAAUISMxEREhAREREzEhASEBIQEBMREBIQEjMREBIQERIREREQEhASEBIQEjIRERERERASMhIQEhASMhEADQUAAAAAAAAAAA==
+      service: broadlink.send
+  remote_aircon_mode:
+    alias: Remote Aircon Mode
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgBAAGsAAUISMhESERESEBEzEhASEBIQEhARERERERERMhMQEREREREQEhASMhIyEhERMhIQEhASMhIyEjISMhIADQUAAAAAAAAAAA==
+      service: broadlink.send
+  remote_cignal_mute:
+    alias: Remote Cignal Mute
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgC6AFceDw4ODw8cDx0qHg8ODw8ODw8PDg8OEA4PHh0eHR0QDxwPDw4PHh0PDx4ODw8OHg8ODhAPDh4PDx0dAAlIVh4PDg8PDxwPHSodDw8ODw8PDw4PDw8ODw8dHh0eHg4PHQ8ODw8dHg8PHQ8ODw8dDw8ODw8PHg4PHR0ACUhXHg8ODg8OHQ8dKh4PDg8PDw4OEA4PDhAODx4dHR4dEA4dDw8ODx4dDw8dDw8PDh4PDg4QDg8dEA8cHgANBQAAAAAAAAAAAAAAAAAA
+      service: broadlink.send
+  remote_cignal_volume_up:
+    alias: Remote Cignal Volume Up
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgB8AFgdDw4PDg4dDx0qHg8ODw8ODw8PDg8PDw4QHR0eHR0QDh0eHR4dDw8dDw8PDh0PDw4QHR0PDw4PDw8OAAk6Vx0PDg8PDh0PHSodDw8ODw4QDw4OEA4PDw8dHh0eHQ8OHh0eHR4PDh0QDg8OHg8ODw8eHQ8ODw8ODw4ADQUAAAAAAAAAAAAAAAA=
+      service: broadlink.send
+  remote_cignal_volume_down:
+    alias: Remote Cignal Volume Down
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgB8AFYeDw4OEA4dDx0qHQ8PDg8OEA4PDhAPDg8PHR4dHR8ODh4PDg4QHR4PDh4PDg8OHg8PDg8dHg8PDg8dAAlIVx0QDg4PDh0PHSoeDw4OEA4PDhAODw8PDg8eHR4dHRAPHA8PDg8eHQ8PHQ8PDw4eDw4OEB0eDw4OEB0ADQUAAAAAAAAAAAAAAAA=
+      service: broadlink.send
+  remote_cignal_channel_up:
+    alias: Remote Cignal Channel Up
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgB8AFYeDw4PDw4dDx0qHQ8PDw4PDw4PDw8PDg8PHh0dHh0PDx0dHh0eDw4dEA8ODx0PDx0dDw8PDw4PDg8PAAk5Vx4PDg8ODxwPHikeDw4PDw4PDw8PDg8PDg8eHR4dHRAPHB4dHh0PDx0PDhAOHQ8PHR4PDg4QDg8PDw4ADQUAAAAAAAAAAAAAAAA=
+      service: broadlink.send
+  remote_cignal_channel_down:
+    alias: Remote Cignal Channel Down
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgB8AFceDw4ODw4dDx0qHg8ODhAODw4QDg8OEA4PHh0dHh0PDx0PDw4PHh0PDx0PDhAOHQ8PHR4PDg4QDg8eAAlHVx0PDw4PDh0PHSoeDw4OEA4PDhAODw4QDg8eHR4dHQ8PHQ8PDg8dHg4QHQ8PDw4dDw8dHg8ODhAODx4ADQUAAAAAAAAAAAAAAAA=
+      service: broadlink.send
+  remote_cignal_up:
+    alias: Remote Cignal Up
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgC0AFcdDw4ODw8dDx0pHg8PDg8OEA4PDhAODw8PHh0eHB4PDx0dHR4dDw8dDw8PDx0dHR4PDx0PDg4QDgAJOlYeDw4PDw8cDx0qHQ8PDg8OEA4PDhAODw4QHR4dHR4PDh4dHh0dDw8dEA8ODx0dHh0PDh4PDg8PDgAJOlceDw4ODw4dDx0qHg8ODw8ODw8PDg8OEA4PHh0dHh0QDh0eHR0eDw8dDw8PDxweHR0QDh4PDg8ODwANBQAAAAA=
+      service: broadlink.send
+  remote_cignal_down:
+    alias: Remote Cignal Down
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgB4AFYeDw8ODw4dDx0qHQ8PDhAODw4QDg8OEA4PHR4dHh4ODx0PDw4PHh0PDx0PDhAOHR4dHRAOHg4PHQAJSVYeDw4PDw4dDx0qHQ8PDg8OEA4PDw8ODw8PHR4dHh0PDx0PDg8PHR4PDh4PDhAOHR4dHg8OHQ8PHQANBQ==
+      service: broadlink.send
+  remote_cignal_left:
+    alias: Remote Cignal Left
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgB0AFgcEA0QDRAcDx0pHg8PEA0QDg4PDhAODw4QHxsgGx8OEBwdHR4dEA4dDxENDh4dHR4PEBwfGxEACThZGxAOEA0QGxAcLBwQDRAODg8QDhANEA4QDR8cHxwfDhAbHR4fHBAOHw0QDg4dHh0fDhAbIBsQAA0FAAAAAA==
+      service: broadlink.send
+  remote_cignal_right:
+    alias: Remote Cignal Right
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgC0AFYeDw4ODw8dDx0pHg8PDg8OEA8ODhAODw4QHR0eHR4PDh4ODw4QHR4PDh0QDw4OHh4dHQ8PHR0QDgAJSFceDw4PDg8cDx4pHg8PDg8OEA8ODhAPDg4QHR0fHB4PDx0PDg8PHR0PDx0QDw4PHR0eHQ8PHR0QDgAJSFgcDw8PDg4dDx0qHg8ODw8ODw4QDw4OEA8OHR4dHh0QDh0PDw8OHh0OEB0PDw8OHR4dHg8OHh4ODwANBQAAAAA=
+      service: broadlink.send
+  remote_cignal_ok:
+    alias: Remote Cignal Ok
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgB4AFYeDw4PDw4dDx0qHQ8PDhAODw4QDg8OEA4PHR4eHR0PDx0dHh0eDw4eDw8ODx0dHh0QDw4OHg4PDgAJO1YeDw4PDw8cDx0qHQ8PDw4PDw8ODw8PDg8PHR4dHh0PDh4dHh0eEA0eDw8ODx0dHh0QDw4OHg4PDgANBQ==
+      service: broadlink.send
+  remote_cignal_menu:
+    alias: Remote Cignal Menu
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgB4AFcdDw8ODw4dDx0qHg8ODhAODw4QDg8OEA4PHh0dHh0QDh0PDw4PHh0PDx0PDw8OHR4dHh0dHg8ODgAJO1YeDw4PDg8dDx0qHQ8PDw4OEA4PDw8ODw8PHR4eHB4PDh4PDg8PHR4PDh0QDw4OHh0eHR4dHg8ODgANBQ==
+      service: broadlink.send
+  remote_cignal_back:
+    alias: Remote Cignal Back
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgCoAFceDw4ODw4dDx0qHg8ODhAODw4QDg8OEA4QHR0dHh0QDh0eHR0eDw8dDw4QDh0eHR4dHR4dAAlJVh4PDg4QDh0OHiodDw8ODw4QDw4OEA4PDw8dHh0dHg8OHh0eHR4PDh0QDg8OHh0eHR4dHh0ACUlWHg8ODg8PHQ4eKh0PDw4PDhAODw4QDg8PDx0dHh0eDw4eHR0fHA8PHRAODw4eHR4dHR4dHgANBQ==
+      service: broadlink.send
+  remote_cignal_exit:
+    alias: Remote Cignal Exit
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgCuAFYeDw4PDw4dDx0qHQ8PDw4PDw4PDw8ODw8PHR4dHh0PDx0PDg4QHR4PDh4PDg8OHh4dHR4dHh0ACUhXHg8ODg8OHQ8eKR4PDg8PDg8PDw4PDw8OEB0dHh0eDw8dDw4OEB0dDw8dEA8ODh4dHh0eHR0eAAlIVx0PDw4PDh0PHSoeDw4PDw4PDhAODw4QDg8dHh0eHQ8PHQ8PDg8eHQ8PHQ8PDw4dHh0eHR0eHQANBQAAAAAAAAAAAAA=
+      service: broadlink.send
+  remote_cignal_red:
+    alias: Remote Cignal Red
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgB0AFYeDg8ODw8dDh4qHQ8PDg8OEA4PDhAODw4QHR4dHR4PDh4dHh0eDg8dEA4PDh4dDw8dHRAOHh0ACUlWHhANEA4QGxAcLBsQDhANEA4QDRENEA0RDR0eHxwfDRAcHxwfHBANIA0QDQ4eHRAQGx4PEBwfAA0FAAAAAA==
+      service: broadlink.send
+  remote_cignal_green:
+    alias: Remote Cignal Green
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgC6AFYeDw4OEA4dDh4qHQ8PDg8PDw4PDw8ODw8PHR4dHh0PDh4PDw4PHh0PDh4PDhAOHR4PDh4dDw4QDh0OAAk7Vh4PDw4PDh0PHSodDw8OEA4PDhAODw4QDg8dHh0eHQ8PHQ8PDg8dHg8PHQ8OEA4dHg8OHh0PDhAOHQ4ACTtWHg8ODw8OHQ4eKh0PDw4PDw8ODw8PDhAODx0eHR4dDw4eDw8ODx0eDg8eDw4QDh0eDw4eHQ8OEA4dDwANBQAAAAAAAAAAAAAAAAAA
+      service: broadlink.send
+  remote_cignal_yellow:
+    alias: Remote Cignal Yellow
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgC0AFYeDw8ODw4dDx0qHg4PDhAODw4QDg8OEA4PHR4dHh0QDh0dHh0eDw4eDw4QDh0eDw4eHQ8OEA4PDgAJSVceDg8ODw4dDx0qHg8ODhAODw4QDg8OEA4PHh0dHh0QDh0eHR0eDhAdDw4QDh0eDw4eHQ8OEA4PDgAJSVcdDw8ODw4dDx0qHg8ODhAODw4QDg8OEA4PHh0dHh0QDh0eHR0eDw8dDw4QDh0eDw4eHQ8PDw4PDgANBQAAAAA=
+      service: broadlink.send
+  remote_cignal_blue:
+    alias: Remote Cignal Blue
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgCAAFYeDg8PDw4dDh4qHRAODg8PDw4PDw8OEA4PHR4dHh0PDx0QDg4PHR4OEB0PDhAOHR4PDg8QHBAOEA0OEA4ACTpXHhANEA0QHA4eKxwQDhANEA4ODw4QDg8OEB8bIBseDxAcDg8OEB8cDg8fDhANDh4fDhANEBwODw4QDg8OAA0FAAAAAAAAAAA=
+      service: broadlink.send
+  remote_dvd_menu:
+    alias: Remote DVD Menu
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgBYAAABKpEVEBITERMUERIUERMUERITETkROBU1FDYROBU2EzYRORQ2FDURFBEUFDYSEhURERQRExQREjgUNhQQFDYSOBE4FQAFGwABKUgRAAxTAAEpSBIADQU=
+      service: broadlink.send
+  remote_dvd_eject:
+    alias: Remote DVD Eject
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgBYAAABJZUUEREUEhQSEhETEhMUERITEjgRORM2EjgSOBM2EjkROBQRETkTEhETEhMUERITEhMUNRIUEzYSOBE5EzYSORE4FAAFHAABJksRAAxUAAElTBEADQU=
+      service: broadlink.send
+  remote_dvd_mute:
+    alias: Remote DVD Mute
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgBgAAABJpQSFBMSERMSExQRERQSExMSETgUNhI4ETkTNhM3ETkTNhM4ERMTNxE5ExISEhMTEBQSExM3ERMUEhE4EzcRORE4FAAFHAABKUgSAAxTAAEpSBEADFQAASdJEQANBQAAAAAAAAAA
+      service: broadlink.send
+  remote_dvd_setup:
+    alias: Remote DVD Setup
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgBgAAABJpQSExIUExEUEREUExISExEUEzYRORI4FDYTNhI4EjgROBMTETgSOBMSEjgRExI5ERMSOBMSEhMROBITETkSExE5EgAFHgABJksRAAxUAAEoSREADFQAAShJEQANBQAAAAAAAAAA
+      service: broadlink.send
+  remote_dvd_return:
+    alias: Remote DVD Return
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgBQAAABKZEVEBITExIUEREUERMUEREVETgRORU1EzYRORU1ETgSOBQRETkVEBITETgRFRETFBERORUQETgVNRUQFDYUNhE4FAAFHAABKkcRAA0FAAAAAAAAAAA=
+      service: broadlink.send
+  remote_dvd_up:
+    alias: Remote DVD Up
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgBYAAABKpEVEBITERMWDxIUERMVEBITETkROBQ2FDYROBU2EjcRORUQETgWNRQQFRARFBE5EhMROBEVERMUNhM3ETgUERI4FAAFHAABKUgRAAxUAAEpSBEADQU=
+      service: broadlink.send
+  remote_dvd_down:
+    alias: Remote DVD Down
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgBQAAABKZIUERITERMVEBIUERMUERITETkROBQ3ETgRORQ2EjcRORUQEjgUNhETFDYTEhQREhMROREUERMVNRITFDYSOBE4FQAFGwABKUgRAA0FAAAAAAAAAAA=
+      service: broadlink.send
+  remote_dvd_left:
+    alias: Remote DVD Left
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgBYAAABKZEUERITExIUERITERMVEBEVETgRORQ2EzYSOBU1EjgROBQ2FDYSNxYQERQRExQ2EhMUERITERMVNhQ1ETkUERE4FQAFHAABKUgRAAxUAAEmSxQADQU=
+      service: broadlink.send
+  remote_dvd_right:
+    alias: Remote DVD Right
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgBQAAABKpEVEBEUERMUERITEhMUERITETkROBU1FDYSNxY1EjcRORQ2ExEUNxQQFDYSExQREhMRExQ2EhMUNhISFTYTNhE5FAAFHAABKUgRAA0FAAAAAAAAAAA=
+      service: broadlink.send
+  remote_dvd_enter:
+    alias: Remote DVD Enter
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgBQAAABKJIUERITERQUEREUEhIUERIUETgRORQ2EzYRORM3ETkROBQ2FBEUNhITEzcSEhQ3ERMUERI4FBEROBQREjgUERE5FAAFHAABKUgRAA0FAAAAAAAAAAA=
+      service: broadlink.send
+  remote_dvd_rewind:
+    alias: Remote DVD Rewind
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgBQAAABJpQRFBQRFBERFBMRFBERFRMRFDYUNhE4FDcTNhE5FDYTNhE5FDYUERQRETgUERE5FBESExMSFDYTNhIUETgRFBE5EgAFHgABJ0oUAA0FAAAAAAAAAAA=
+      service: broadlink.send
+  remote_dvd_forward:
+    alias: Remote DVD Forward
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgBYAAABJZURFBEUFBERFBETFRARFRETFDYUNhE4FDcSNxE5FDYTNhEVERMUERITETkRFBE4ERUROBE5FDYTNhEVETgRFBE5EQAFHwABJ0oUAAxSAAEmSxMADQU=
+      service: broadlink.send
+  remote_dvd_fast_rewind:
+    alias: Remote DVD Fast Rewind
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgBYAAABKJIUEhETEhQTEREUEhQSEhETEjgSOBQ2EjgROBQ2EjgRORMSERMSExQSETgUEREUEhMTNhI4EjgUNRMUEjYSOBI4FAAFHAABKUkRAAxUAAEoSREADQU=
+      service: broadlink.send
+  remote_dvd_fast_forward:
+    alias: Remote DVD Fast Forward
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgBQAAABJpURFBMSFBESExMRFBERFRMRFDYTNxE4FDcTNhE5FTUTNhEVExEUNhQRFDYRExQRERUTNhE5FRASNxUQETkVNRE5EgAFHgABJ0oUAA0FAAAAAAAAAAA=
+      service: broadlink.send
+  remote_dvd_play:
+    alias: Remote DVD Play
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgBIAAABKZEVEREUEhIVEBITERQUERITETgSOBQ2FTUSNxY1EzYRORQRERQROREUETgRFBE5ERQRORE4FRARORQRETkVEBE4FQANBQ==
+      service: broadlink.send
+  remote_dvd_stop:
+    alias: Remote DVD Stop
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgBYAAABKZISExEUExEUERIUExESExEUEzcUNRI5EzYRORI4ETkROBI4EzcUNRMTETgUERE5EhMRFBMRExMROBITETkSExE5EgAFHgABKUgRAAxVAAEoSREADQU=
+      service: broadlink.send
+  remote_dvd_volume_up:
+    alias: Remote DVD Volume Up
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgBYAAABKZIVEBITERQUEREUERMVEBIUETgRORU1EzYSOBQ2FTUROBY1ExEUEREUETkSExETFRERFBE4EjgVNRQQFjUROBE5FAAFHAABKUgSAAxUAAEqRxIADQU=
+      service: broadlink.send
+  remote_dvd_volume_down:
+    alias: Remote DVD Volume Down
+    sequence:
+    - data:
+        host: xxx.xxx.xxx.xxx
+        packet: JgBQAAABKJMTEhMRFBERFBQRFBERFBMREzgTNhQ2FDYUNhM2EjgSOBE4FBIRFBMRFDYUERQ2ExEVERE4FDYSOBEUEzcRFBM2EQAFIAABJksTAA0FAAAAAAAAAAA=
+      service: broadlink.send
+  remote_sony_tv_power:
+    alias: Remote Sony TV Power
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: POWER
+      service: androidtv.adb_command
+  remote_sony_tv_1:
+    alias: Remote Sony TV 1
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: input keyevent 145
+      service: androidtv.adb_command
+  remote_sony_tv_2:
+    alias: Remote Sony TV 2
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: input keyevent 146
+      service: androidtv.adb_command
+  remote_sony_tv_3:
+    alias: Remote Sony TV 3
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: input keyevent 147
+      service: androidtv.adb_command
+  remote_sony_tv_4:
+    alias: Remote Sony TV 4
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: input keyevent 148
+      service: androidtv.adb_command
+  remote_sony_tv_5:
+    alias: Remote Sony TV 5
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: input keyevent 149
+      service: androidtv.adb_command
+  remote_sony_tv_6:
+    alias: Remote Sony TV 6
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: input keyevent 150
+      service: androidtv.adb_command
+  remote_sony_tv_7:
+    alias: Remote Sony TV 7
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: input keyevent 151
+      service: androidtv.adb_command
+  remote_sony_tv_8:
+    alias: Remote Sony TV 8
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: input keyevent 152
+      service: androidtv.adb_command
+  remote_sony_tv_9:
+    alias: Remote Sony TV 9
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: input keyevent 153
+      service: androidtv.adb_command
+  remote_sony_tv_dot:
+    alias: Remote Sony TV Dot
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: input keyevent 158
+      service: androidtv.adb_command
+  remote_sony_tv_0:
+    alias: Remote Sony TV 0
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: input keyevent 144
+      service: androidtv.adb_command
+  #remote_sony_tv_google_play:
+  #  alias: Remote Sony TV Google Play
+  #  sequence:
+  #  - data:
+  #      entity_id: media_player.sony_tv
+  #      source: com.google.android.videos
+  #    service: media_player.select_source
+  remote_sony_tv_youtube:
+    alias: Remote Sony TV Youtube
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        source: YouTube
+      service: media_player.select_source
+  remote_sony_tv_netflix:
+    alias: Remote Sony TV Netflix
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        source: com.netflix.ninja
+      service: media_player.select_source
+  #remote_sony_tv_primevideo:
+  #  alias: Remote Sony TV Prime Video
+  #  sequence:
+  #  - data:
+  #      entity_id: media_player.sony_tv
+  #      source: com.amazon.avod
+  #    service: media_player.select_source
+  #remote_sony_tv_hbogo:
+  #  alias: Remote Sony TV HBO Go
+  #  sequence:
+  #  - data:
+  #      entity_id: media_player.sony_tv
+  #      source: eu.hbogo.androidtv.production
+  #    service: media_player.select_source
+  remote_sony_tv_menu:
+    alias: Remote Sony TV Menu
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: MENU
+      service: androidtv.adb_command
+  remote_sony_tv_red:
+    alias: Remote Sony TV Red
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: RED
+      service: androidtv.adb_command
+  remote_sony_tv_green:
+    alias: Remote Sony TV Green
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: GREEN
+      service: androidtv.adb_command
+  remote_sony_tv_yellow:
+    alias: Remote Sony TV Yellow
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: YELLOW
+      service: androidtv.adb_command
+  remote_sony_tv_blue:
+    alias: Remote Sony TV Blue
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: BLUE
+      service: androidtv.adb_command
+  remote_sony_tv_guide:
+    alias: Remote Sony TV Guide
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: input keyevent 
+      service: androidtv.adb_command
+  remote_sony_tv_mic:
+    alias: Remote Sony TV Mic
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: input keyevent 231
+      service: androidtv.adb_command
+  remote_sony_tv_apps:
+    alias: Remote Sony TV Apps
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: input keyevent 
+      service: androidtv.adb_command
+  remote_sony_tv_input:
+    alias: Remote Sony TV Input
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: INPUT
+      service: androidtv.adb_command
+  remote_sony_tv_setings:
+    alias: Remote Sony TV Setings
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: SETTINGS
+      service: androidtv.adb_command
+  remote_sony_tv_up:
+    alias: Remote Sony TV Up
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: UP
+      service: androidtv.adb_command
+  remote_sony_tv_left:
+    alias: Remote Sony TV Left
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: LEFT
+      service: androidtv.adb_command
+  remote_sony_tv_enter:
+    alias: Remote Sony TV Enter
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: ENTER
+      service: androidtv.adb_command
+  remote_sony_tv_right:
+    alias: Remote Sony TV Right
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: RIGHT
+      service: androidtv.adb_command
+  remote_sony_tv_down:
+    alias: Remote Sony TV Down
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: DOWN
+      service: androidtv.adb_command
+  remote_sony_tv_back:
+    alias: Remote Sony TV Back
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: BACK
+      service: androidtv.adb_command
+  remote_sony_tv_home:
+    alias: Remote Sony TV Home
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: HOME
+      service: androidtv.adb_command
+  remote_sony_tv_tv:
+    alias: Remote Sony TV TV
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: TV
+      service: androidtv.adb_command
+  remote_sony_tv_vol_up:
+    alias: Remote Sony TV Vol Up
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: VOLUME_UP
+      service: androidtv.adb_command
+  remote_sony_tv_ch_up:
+    alias: Remote Sony TV Ch Up
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: input keyevent 166
+      service: androidtv.adb_command
+  remote_sony_tv_last:
+    alias: Remote Sony TV Last
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: input keyevent 229
+      service: androidtv.adb_command
+  remote_sony_tv_vol_down:
+    alias: Remote Sony TV Vol Down
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: VOLUME_DOWN
+      service: androidtv.adb_command
+  remote_sony_tv_mute:
+    alias: Remote Sony TV Mute
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: MUTE
+      service: androidtv.adb_command
+  remote_sony_tv_ch_down:
+    alias: Remote Sony TV Ch Down
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: input keyevent 167
+      service: androidtv.adb_command
+  remote_sony_tv_audio:
+    alias: Remote Sony TV Audio
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: input keyevent 222
+      service: androidtv.adb_command
+  remote_sony_tv_captions:
+    alias: Remote Sony TV Captions
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: input keyevent 175
+      service: androidtv.adb_command
+  remote_sony_tv_help:
+    alias: Remote Sony TV Help
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: input keyevent 259
+      service: androidtv.adb_command
+  remote_sony_tv_rewind:
+    alias: Remote Sony TV Rewind
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: REWIND
+      service: androidtv.adb_command
+  remote_sony_tv_play:
+    alias: Remote Sony TV Play
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: input keyevent 126
+      service: androidtv.adb_command
+  remote_sony_tv_forward:
+    alias: Remote Sony TV Forward
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: FAST_FORWARD
+      service: androidtv.adb_command
+  remote_sony_tv_exit:
+    alias: Remote Sony TV Exit
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: input keyevent 111
+      service: androidtv.adb_command
+  remote_sony_tv_pause:
+    alias: Remote Sony TV Pause
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: input keyevent 127
+      service: androidtv.adb_command
+  remote_sony_tv_info:
+    alias: Remote Sony TV Info
+    sequence:
+    - data:
+        entity_id: media_player.sony_tv
+        command: input keyevent 165
+      service: androidtv.adb_command
+#  remote_lg_tv_volume_up:
+#    alias: Remote LG TV Volume Up
+#    sequence:
+#    - data:
+#        host: xxx.xxx.xxx.xxx
+#        packet: JgBIAAABK5ESExQRFjQTEhUQFhAVEBYPFjQTNxMSFTUTNhM3EzcTNxITFTUSExQRFRAWEBUQFRAWNBMSFjQTNxM2EzcTNxU0EwANBQ==
+#      service: broadlink.send
+#  remote_lg_tv_volume_down:
+#    alias: Remote LG TV Volume Down
+#    sequence:
+#    - data:
+#        host: xxx.xxx.xxx.xxx
+#        packet: JgBIAAABKZMUERQRFDYUERQSFBEUERQRFTUUNhQRFDYUNRU1FDYUNhQ1FTUUERURFBEUERQRFREUERQRFTUUNhQ1FDYUNhQ2FAANBQ==
+#      service: broadlink.send
+#  remote_lg_tv_channel_up:
+#    alias: Remote LG TV Channel Up
+#    sequence:
+#    - data:
+#        host: xxx.xxx.xxx.xxx
+#        packet: JgBQAAABKJQTEhYQFTQTExQRFRAWDxYQFTQTNxMSFjQTNxM3EjcTNxMSFg8WEBUQFg8WEBUQFRAWNBM3EzYTNxM3EzYTNxM3EwAFNAABKEoTAA0FAAAAAAAAAAA=
+#      service: broadlink.send
+#  remote_lg_tv_channel_down:
+#    alias: Remote LG TV Channel Down
+#    sequence:
+#    - data:
+#        host: xxx.xxx.xxx.xxx
+#        packet: JgBQAAABKJQUERQRFTUTEhUQFREUERQRFTUTNxMSFDYTNhQ2FDYTNxQ1FBIUERQRFRAVERQRFBEVERQ1FDYUNhQ1EzcUNhQ1FQAFMwABKEoUAA0FAAAAAAAAAAA=
+#      service: broadlink.send
+#  remote_lg_tv_mute:
+#    alias: Remote LG TV Mute
+#    sequence:
+#    - data:
+#        host: xxx.xxx.xxx.xxx
+#        packet: JgBQAAABKJQTEhYPFjQTEhYQFBEVEBYPFTUTNxMSFjQTNxI3FjQTNxM2ExMVEBU1ExIVEBUQFhAVEBY0EzYTExU0EzcTNxM3EwAG7gABKEoTAA0FAAAAAAAAAAA=
+#      service: broadlink.send
+#  remote_lg_tv_home:
+#    alias: Remote LG TV Home
+#    sequence:
+#    - data:
+#        host: xxx.xxx.xxx.xxx
+#        packet: JgBIAAABKJMWEBUQFjQTEhYPFhAVEBUQFjQTNxITFTUVNBY0EzcTNhMTFRAVNRM2EzcTNxM2ExMVNRI3ExIWEBUQFRAWEBU0EwANBQ==
+#      service: broadlink.send
+#  remote_lg_tv_settings:
+#    alias: Remote LG TV Settings
+#    sequence:
+#    - data:
+#        host: xxx.xxx.xxx.xxx
+#        packet: JgBIAAABKJQTExUQFTUTEhUQFREUERQRFTUTNxITFTUSNxM3EzcTNhM3EzcTEhURFBEVEBQ2ExIUERYQFDUTNxM3EjcTExU0EwANBQ==
+#      service: broadlink.send
+#  remote_lg_tv_inputs:
+#    alias: Remote LG TV Inputs
+#    sequence:
+#    - data:
+#        host: xxx.xxx.xxx.xxx
+#        packet: JgBIAAABKZMTExUQFjQTEhYPFhAVEBUQFjQTNxITFTUSNxM3EzcTNhM3EzcTEhY0ExIWDxYQFRAWDxYQFTQTExU0EzcTNxM2EwANBQ==
+#      service: broadlink.send
+#  remote_lg_tv_exit:
+#    alias: Remote LG TV Exit
+#    sequence:
+#    - data:
+#        host: xxx.xxx.xxx.xxx
+#        packet: JgBQAAABKJMTERMREzYTERMRFBARExMREzYTNhMREzYUNRQ1EzYTNhM2EzYTERQ1FDUTERM2ExETERQQFDUSEhMREzYTERM2FAAFIwABKEkTAA0FAAAAAAAAAAA=
+#      service: broadlink.send
+#  remote_lg_tv_up:
+#    alias: Remote LG TV Up
+#    sequence:
+#    - data:
+#        host: xxx.xxx.xxx.xxx
+#        packet: JgBIAAABKJQTEhIUEjcTExITFRAWEBUQFTQSOBMTFTQTNxM3EjcTNxMSFhAVEBUQFhAVEBU0ExMVNBM3EzcTNxI3EzcTEhY0EwANBQ==
+#      service: broadlink.send
+#  remote_lg_tv_down:
+#    alias: Remote LG TV Down
+#    sequence:
+#    - data:
+#        host: xxx.xxx.xxx.xxx
+#        packet: JgBIAAABKpIVERQRFDYTEhMSFBIUERQREzcUNhMSFDYUNRQ2FDYUNRU1FBETExITEhMUEhQ1EhQSExQ1FTUUNhQ2FDUVERQ1FQANBQ==
+#      service: broadlink.send
+#  remote_lg_tv_left:
+#    alias: Remote LG TV Left
+#    sequence:
+#    - data:
+#        host: xxx.xxx.xxx.xxx
+#        packet: JgBIAAABJ5QTExQRFTUTEhUQFREUERQRFTUTNxITFDYSNxM3EzcTNhM3EzcTNxITFBEVEBYQFBEVEBURFBEVNRI3EzcTNxM2FQANBQ==
+#      service: broadlink.send
+#  remote_lg_tv_right:
+#    alias: Remote LG TV Right
+#    sequence:
+#    - data:
+#        host: xxx.xxx.xxx.xxx
+#        packet: JgBIAAABKJQTEhURFTUUERQRFRAVERQRFDYSNxMTFDUTNxM3EzYTNxMSFjQTNxMSFg8WEBUQExIWNBMSFhAUNRM3EzcSNxM3EwANBQ==
+#      service: broadlink.send
+#  remote_lg_tv_ok:
+#    alias: Remote LG TV Ok
+#    sequence:
+#    - data:
+#        host: xxx.xxx.xxx.xxx
+#        packet: JgBIAAABKpMUERQRFDYUERQRFREUERQRFDYUNhQRFDYUNRU1FDYUNRURFBEUNhQRFBEVERQ1EhQUNRU1ExIWNBQ2FDUVERQ1FQANBQ==
+#      service: broadlink.send
+#  remote_lg_tv_netflix:
+#    alias: Remote LG TV Netflix
+#    sequence:
+#    - data:
+#        host: xxx.xxx.xxx.xxx
+#        packet: JgBIAAABJ5UUERUQFTUUERURFBEUERURFDUTNxMSFTUUNhM2EzcTNxMSFDYTNhMTFDUTExQ1ExMUNhMSFBEUNhMSFDYUERQ2EwANBQ==
+#      service: broadlink.send
+#  remote_lg_tv_amazon:
+#    alias: Remote LG TV Amazon
+#    sequence:
+#    - data:
+#        host: xxx.xxx.xxx.xxx
+#        packet: JgBIAAABKJQTEhYPFjQTEhYQFRAVEBURFTQTNxMSFjQSOBM2EzcTNxMSFg8WNBM3EzYTExU0ExMVNBM3ExIWEBUQFTUTEhU1EwANBQ==
+#      service: broadlink.send
+#  remote_lg_tv_red:
+#    alias: Remote LG TV Red
+#    sequence:
+#    - data:
+#        host: xxx.xxx.xxx.xxx
+#        packet: JgBIAAABKJQVEBMTFDUVERITFBEUERUREjcVNRQREzcUNhQ2FDUUNhQRFDYUERITEzcUNhI4FBESOBQREzcUNRUREhMUERI4FAANBQ==
+#      service: broadlink.send
+#  remote_lg_tv_green:
+#    alias: Remote LG TV Green
+#    sequence:
+#    - data:
+#        host: xxx.xxx.xxx.xxx
+#        packet: JgBQAAABKJQTEhYQFTQTExUQFRAWEBUQFTUSNxMTFTQTNxM3EzYTNxM3ExIVEBYQFTQTNxM3ExIWDxY0EzcTNhMTFRAVEBY0EwAF5gABKEoTAA0FAAAAAAAAAAA=
+#      service: broadlink.send
+#  remote_lg_tv_yellow:
+#    alias: Remote LG TV Yellow
+#    sequence:
+#    - data:
+#        host: xxx.xxx.xxx.xxx
+#        packet: JgBIAAABKZMTExUQFTUTEhUQFhAVEBUQFjQTNxUQEjgSNxM3EzcTNhY0EzcTEhITFhAVNBM3ExITExUQFDYSNxU1ExIVERQ1FQANBQ==
+#      service: broadlink.send
+#  remote_lg_tv_blue:
+#    alias: Remote LG TV Blue
+#    sequence:
+#    - data:
+#        host: xxx.xxx.xxx.xxx
+#        packet: JgBIAAABJ5UTEhUQFjQTEhYPFhAVEBYPFjQTNxMSFTUTNhM3EzcTNhM3ExIWEBQRFRAWNBM3ExIVEBU1EzcTNhM3ExIVERQ1FQANBQ==
+#      service: broadlink.send

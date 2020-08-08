@@ -1,0 +1,291 @@
+arm_away:
+  alias: Arm Away
+  sequence:
+  - data:
+      entity_id: alarm_control_panel.home_alarm
+    service: alarm_control_panel.alarm_arm_away
+arm_home:
+  alias: Arm Home
+  sequence:
+  - data:
+      entity_id: alarm_control_panel.home_alarm
+    service: alarm_control_panel.alarm_arm_home
+disarm:
+  alias: Disarm
+  sequence:
+  - data:
+      code: nnnn
+      entity_id: alarm_control_panel.home_alarm
+    service: alarm_control_panel.alarm_disarm
+socket_1_on:
+  alias: Socket 1 On
+  sequence:
+  - data:
+      event: socket_1_on
+    service: ifttt.trigger
+socket_1_off:
+  alias: Socket 1 Off
+  sequence:
+  - data:
+      event: socket_1_off
+    service: ifttt.trigger
+socket_2_on:
+  alias: Socket 2 On
+  sequence:
+  - data:
+      event: socket_2_on
+    service: ifttt.trigger
+socket_2_off:
+  alias: Socket 2 Off
+  sequence:
+  - data:
+      event: socket_2_off
+    service: ifttt.trigger
+socket_3_on:
+  alias: Socket 3 On
+  sequence:
+  - data:
+      event: socket_3_on
+    service: ifttt.trigger
+socket_3_off:
+  alias: Socket 3 Off
+  sequence:
+  - data:
+      event: socket_3_off
+    service: ifttt.trigger
+start_siren:
+  alias: Start Siren
+  sequence:
+  - data:
+      entity_id: switch.siren
+    service: switch.turn_on
+stop_siren:
+  alias: Stop Siren
+  sequence:
+  - data:
+      entity_id: switch.siren
+    service: switch.turn_off
+#start_motion:
+#  alias: Start Motion Sensors
+#  sequence:
+#  - data:
+#      entity_id: input_boolean.livingroom_motion_sensor
+#    service: input_boolean.turn_off
+#  - data:
+#      entity_id: input_boolean.office_motion_sensor
+#    service: input_boolean.turn_off
+#  - data:
+#      entity_id: input_boolean.kitchen_motion_sensor
+#    service: input_boolean.turn_off
+#  - data:
+#      event: motion_detection_on
+#    service: ifttt.trigger
+#  - data:
+#      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Wyze motion detection turned
+#        on!'
+#      notification_id: 4
+#      title: Security
+#    service: persistent_notification.create
+#  - data:
+#      entity_id: input_boolean.motion_monitoring
+#    service: input_boolean.turn_on
+#stop_motion:
+#  alias: Stop Motion Sensors
+#  sequence:
+#  - data:
+#      event: motion_detection_off
+#    service: ifttt.trigger
+#  - data:
+#      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Wyze motion detection turned
+#        off!'
+#     notification_id: 4
+#      title: Security
+#    service: persistent_notification.create
+# - data:
+#      entity_id: input_boolean.motion_monitoring
+#    service: input_boolean.turn_off
+#  - data:
+#      entity_id: input_boolean.livingroom_motion_sensor
+#    service: input_boolean.turn_off
+#  - data:
+#      entity_id: input_boolean.office_motion_sensor
+#    service: input_boolean.turn_off
+#  - data:
+#      entity_id: input_boolean.kitchen_motion_sensor
+#    service: input_boolean.turn_off
+turn_cameras_on:
+  alias: Turn Cameras On
+  sequence:
+  #- data:
+  #    entity_id: input_boolean.livingroom_motion_sensor
+  #  service: input_boolean.turn_off
+  #- data:
+  #    entity_id: input_boolean.office_motion_sensor
+  #  service: input_boolean.turn_off
+  #- data:
+  #    entity_id: input_boolean.kitchen_motion_sensor
+  #  service: input_boolean.turn_off
+  - data:
+      event: cameras_on
+    service: ifttt.trigger
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Cameras turned on!'
+      notification_id: 4
+      title: Security
+    service: persistent_notification.create
+  - data:
+      entity_id: input_boolean.cameras
+    service: input_boolean.turn_on
+  #- data:
+  #    entity_id: input_boolean.motion_monitoring
+  #  service: input_boolean.turn_on
+turn_cameras_off:
+  alias: Turn Cameras Off
+  sequence:
+  - data:
+      event: cameras_off
+    service: ifttt.trigger
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Cameras turned off!'
+      notification_id: 4
+      title: Security
+    service: persistent_notification.create
+  - data:
+      entity_id: input_boolean.cameras
+    service: input_boolean.turn_off
+  #- data:
+  #    entity_id: input_boolean.motion_monitoring
+  #  service: input_boolean.turn_off
+  #- data:
+  #    entity_id: input_boolean.livingroom_motion_sensor
+  #  service: input_boolean.turn_off
+  #- data:
+  #    entity_id: input_boolean.office_motion_sensor
+  #  service: input_boolean.turn_off
+  #- data:
+  #    entity_id: input_boolean.kitchen_motion_sensor
+  #  service: input_boolean.turn_off
+turn_notifications_on:
+  alias: Turn Notifications On
+  sequence:
+  - data:
+      event: notifications_on
+    service: ifttt.trigger
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Wyze notifications turned
+        on!'
+      notification_id: 14
+      title: Security
+    service: persistent_notification.create
+  - data:
+      entity_id: input_boolean.notifications
+    service: input_boolean.turn_on
+turn_notifications_off:
+  alias: Turn Notifications Off
+  sequence:
+  - data:
+      event: notifications_off
+    service: ifttt.trigger
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Wyze notifications turned
+        off!'
+      notification_id: 14
+      title: Security
+    service: persistent_notification.create
+  - data:
+      entity_id: input_boolean.notifications
+    service: input_boolean.turn_off
+alarm_away:
+  alias: Alarm Away
+  sequence:
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Starting alarm process in
+        Away mode.'
+      notification_id: 15
+      title: Security
+    service: persistent_notification.create
+  - data:
+      entity_id: input_text.broadcast_message
+      value: Alarm has been triggered and owners have been notified.
+    service: input_text.set_value
+  - data:
+      entity_id: input_boolean.siren
+    service: input_boolean.turn_on
+  - data:
+      entity_id: group.house_lights
+    service: homeassistant.toggle
+alarm_home:
+  alias: Alarm Home
+  sequence:
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Starting alarm process in
+        Home mode.'
+      notification_id: 16
+      title: Security
+    service: persistent_notification.create
+  - data:
+      entity_id: input_text.broadcast_message
+      value: Alarm has been triggered and owners have been notified.
+    service: input_text.set_value
+  - data:
+      entity_id: input_boolean.siren
+    service: input_boolean.turn_on
+someone_arrived_home_during_the_day:
+  alias: Someone arrived home during the day
+  sequence:
+  - data: {}
+    service: script.disarm
+someone_arrived_home_at_night:
+  alias: Someone arrived home at night
+  sequence:
+  - data: {}
+    service: script.disarm
+  - data:
+      entity_id: switch.light_kitchen_wall
+    service: switch.turn_on
+noone_home_but_dogs:
+  alias: Noone home but dogs
+  sequence:
+  - data: {}
+    service: script.arm_home
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] No one is home but the dogs.'
+      notification_id: 1
+      title: Security
+    service: persistent_notification.create
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] No one is home but the dogs.'
+      title: Security
+    service: notify.pushbullet
+everyone_away:
+  alias: Every one away
+  sequence:
+  - data: {}
+    service: script.arm_away
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Every one is away.'
+      notification_id: 1
+      title: Security
+    service: persistent_notification.create
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Every one is away.'
+      title: Security
+    service: notify.pushbullet
+reset_flags:
+  alias: Reset Flags
+  sequence:
+  #- data:
+  #    entity_id: input_boolean.livingroom_motion_sensor
+  #  service: input_boolean.turn_off
+  #- data:
+  #    entity_id: input_boolean.office_motion_sensor
+  #  service: input_boolean.turn_off
+  #- data:
+  #    entity_id: input_boolean.kitchen_motion_sensor
+  #  service: input_boolean.turn_off
+  - data:
+      entity_id: input_boolean.fire_sensor
+    service: input_boolean.turn_off
+  - data:
+      entity_id: input_boolean.co2_sensor
+    service: input_boolean.turn_off

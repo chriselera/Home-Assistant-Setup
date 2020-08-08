@@ -1,0 +1,909 @@
+- id: '1570101561560'
+  alias: No one's home but the dogs
+  trigger:
+  - entity_id: group.family
+    from: home
+    platform: state
+    to: not_home
+  condition:
+  - condition: state
+    entity_id: alarm_control_panel.home_alarm
+    state: disarmed
+  action:
+  - data: {}
+    service: script.noone_home_but_dogs
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] No one is home but the dogs.'
+      notification_id: 1
+      title: Security
+    service: persistent_notification.create
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] No one is home but the dogs.'
+      title: Security
+    service: notify.pushbullet
+- id: '1570101623141'
+  alias: Someone arrived home during the day
+  trigger:
+  - entity_id: group.family
+    from: not_home
+    platform: state
+    to: home
+  condition:
+  - condition: state
+    entity_id: sun.sun
+    state: above_horizon
+  action:
+  - data: {}
+    service: script.someone_arrived_home_during_the_day
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Someone arrived home during
+        the day.'
+      notification_id: 1
+      title: Security
+    service: persistent_notification.create
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Someone arrived home during
+        the day.'
+      title: Security
+    service: notify.pushbullet
+- id: '1574079572851'
+  alias: Someone arrived home at night
+  description: ''
+  trigger:
+  - entity_id: group.family
+    from: not_home
+    platform: state
+    to: home
+  condition:
+  - condition: state
+    entity_id: sun.sun
+    state: below_horizon
+  action:
+  - data: {}
+    service: script.someone_arrived_home_at_night
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Someone arrived home at
+        night.'
+      notification_id: 1
+      title: Security
+    service: persistent_notification.create
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Someone arrived home at
+        night.'
+      title: Security
+    service: notify.pushbullet
+- id: '1570547709009'
+  alias: Security Armed Away
+  trigger:
+  - entity_id: alarm_control_panel.home_alarm
+    platform: state
+    to: armed_away
+  condition: []
+  action:
+  - data: {}
+    service: script.reset_flags
+  - data:
+      entity_id: input_boolean.notifications
+    service: input_boolean.turn_on
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Security alarm has been
+        armed on Away mode!'
+      notification_id: 2
+      title: Security
+    service: persistent_notification.create
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Security alarm has been
+        armed on Away mode!'
+      title: Security
+    service: notify.pushbullet
+  - data:
+      entity_id: input_text.broadcast_message
+      value: Security alarm has been armed on Away mode!
+    service: input_text.set_value
+- id: '1570547743835'
+  alias: Security Disarmed
+  trigger:
+  - entity_id: alarm_control_panel.home_alarm
+    platform: state
+    to: disarmed
+  condition: []
+  action:
+  - data:
+      entity_id: input_boolean.siren
+    service: input_boolean.turn_off
+  - data:
+      entity_id: input_boolean.notifications
+    service: input_boolean.turn_off
+  - data: {}
+    service: script.reset_flags
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Security alarm has been
+        disarmed!'
+      notification_id: 2
+      title: Security
+    service: persistent_notification.create
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Security alarm has been
+        disarmed!'
+      title: Security
+    service: notify.pushbullet
+  - data:
+      entity_id: input_text.broadcast_message
+      value: Security alarm has been disarmed!
+    service: input_text.set_value
+- id: '1570622443191'
+  alias: Alarm Triggered When Armed Away
+  trigger:
+  - entity_id: alarm_control_panel.home_alarm
+    from: pending
+    platform: state
+    to: triggered
+  condition:
+  - condition: state
+    entity_id: input_text.alarm_mode
+    state: armed_away
+  action:
+  - data:
+      entity_id: input_text.alarm_mode
+      value: ''
+    service: input_text.set_value
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Alarm has been triggered
+        in Armed Away mode!'
+      notification_id: 3
+      title: Security
+    service: persistent_notification.create
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Alarm has been triggered
+        in Armed Away mode!'
+      title: Security
+    service: notify.pushbullet
+  - data: {}
+    service: script.alarm_away
+- id: '1570768928042'
+  alias: Security Armed Home
+  description: ''
+  trigger:
+  - entity_id: alarm_control_panel.home_alarm
+    platform: state
+    to: armed_home
+  condition: []
+  action:
+  - data: {}
+    service: script.reset_flags
+  - data:
+      entity_id: input_boolean.notifications
+    service: input_boolean.turn_on
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Security alarm has been
+        armed on Home mode!'
+      notification_id: 2
+      title: Security
+    service: persistent_notification.create
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Security alarm has been
+        armed on Home mode!'
+      title: Security
+    service: notify.pushbullet
+  - data:
+      entity_id: input_text.broadcast_message
+      value: Security alarm has been armed on Home mode!
+    service: input_text.set_value
+- id: '1570902963459'
+  alias: Sensors Triggered When Armed Away
+  description: ''
+  trigger:
+  - entity_id: group.sensors
+    platform: state
+    to: 'on'
+  - entity_id: group.motion
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: alarm_control_panel.home_alarm
+    state: armed_away
+  action:
+  - data:
+      entity_id: input_text.alarm_mode
+      value: armed_away
+    entity_id: input_text.alarm_mode
+    service: input_text.set_value
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Motion/contact sensors triggered
+        in Armed Away Mode.'
+      title: Security
+    service: notify.pushbullet
+  - data:
+      entity_id: alarm_control_panel.home_alarm
+    entity_id: alarm_control_panel.home_alarm
+    service: alarm_control_panel.alarm_trigger
+  mode: single
+- id: '1570904867470'
+  alias: Alarm Triggered When Armed Home
+  description: ''
+  trigger:
+  - entity_id: alarm_control_panel.home_alarm
+    from: pending
+    platform: state
+    to: triggered
+  condition:
+  - condition: state
+    entity_id: input_text.alarm_mode
+    state: armed_home
+  action:
+  - data:
+      entity_id: input_text.alarm_mode
+      value: ''
+    service: input_text.set_value
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Alarm has been triggered
+        in Armed Home mode!'
+      notification_id: 3
+      title: Security
+    service: persistent_notification.create
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Alarm has been triggered
+        in Armed Home mode!'
+      title: Security
+    service: notify.pushbullet
+  - data: {}
+    service: script.alarm_home
+- id: '1570905285005'
+  alias: Sensors Triggered When Armed Home
+  description: ''
+  trigger:
+  - entity_id: group.sensors
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: alarm_control_panel.home_alarm
+    state: armed_home
+  action:
+  - data:
+      entity_id: input_text.alarm_mode
+      value: armed_home
+    entity_id: input_text.alarm_mode
+    service: input_text.set_value
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Contact sensors triggered
+        in Armed Home Mode.'
+      title: Security
+    service: notify.pushbullet
+  - data:
+      entity_id: alarm_control_panel.home_alarm
+    entity_id: alarm_control_panel.home_alarm
+    service: alarm_control_panel.alarm_trigger
+  mode: single
+- id: '1571227922978'
+  alias: Arm Away
+  description: ''
+  trigger:
+  - platform: webhook
+    webhook_id: arm-away
+  condition: []
+  action:
+  - service: script.arm_away
+- id: '1571227957375'
+  alias: Arm Home
+  description: ''
+  trigger:
+  - platform: webhook
+    webhook_id: arm-home
+  condition: []
+  action:
+  - service: script.arm_home
+- id: '1571228007669'
+  alias: Disarm
+  description: ''
+  trigger:
+  - platform: webhook
+    webhook_id: disarm
+  condition: []
+  action:
+  - service: script.disarm
+- id: '1571367298181'
+  alias: MQTT Weather
+  description: ''
+  trigger:
+  - hours: /6
+    platform: time_pattern
+  condition: []
+  action:
+  - data:
+      payload_template: '{ "weather" : {{states.weather.dark_sky.attributes}} }'
+      retain: true
+      topic: alarmpanel/command
+    service: mqtt.publish
+- id: '1571368380076'
+  alias: MQTT Sunrise
+  description: ''
+  trigger:
+  - event: sunrise
+    platform: sun
+  condition: []
+  action:
+  - data:
+      payload: '{"sun":"above_horizon"}'
+      topic: alarmpanel/command
+    service: mqtt.publish
+- id: '1571540387999'
+  alias: Broadcast Message
+  description: ''
+  trigger:
+  - entity_id: input_text.broadcast_message
+    platform: state
+  condition:
+  - condition: state
+    entity_id: input_boolean.sound
+    state: 'on'
+  action:
+  - data:
+      message: '{{ states.input_text.broadcast_message.state }}'
+    service: notify.google_assistant
+  - data:
+      entity_id: input_text.broadcast_message
+      value: ''
+    service: input_text.set_value
+- id: '1571625301347'
+  alias: Socket 1 On
+  description: ''
+  trigger:
+  - entity_id: input_boolean.socket_1
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - service: script.socket_1_on
+- id: '1571625398042'
+  alias: Socket 1 Off
+  description: ''
+  trigger:
+  - entity_id: input_boolean.socket_1
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - service: script.socket_1_off
+- id: '1571625784616'
+  alias: Socket 2 On
+  description: ''
+  trigger:
+  - entity_id: input_boolean.socket_2
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - service: script.socket_2_on
+- id: '1571625827325'
+  alias: Socket 2 Off
+  description: ''
+  trigger:
+  - entity_id: input_boolean.socket_2
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - service: script.socket_2_off
+- id: '1573606760538'
+  alias: Socket 3 On
+  description: ''
+  trigger:
+  - entity_id: input_boolean.socket_3
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - service: script.socket_3_on
+- id: '1573606812148'
+  alias: Socket 3 Off
+  description: ''
+  trigger:
+  - entity_id: input_boolean.socket_3
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - service: script.socket_3_off
+- id: '1571641893762'
+  alias: Notifications On
+  description: ''
+  trigger:
+  - entity_id: input_boolean.notifications
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - service: script.turn_notifications_on
+- id: '1571641938294'
+  alias: Notifications Off
+  description: ''
+  trigger:
+  - entity_id: input_boolean.notifications
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - service: script.turn_notifications_off
+- id: '1571808163232'
+  alias: IFTTT Sensor On
+  description: ''
+  trigger:
+  - platform: webhook
+    webhook_id: ifttt_sensor_on
+  condition:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: alarm_control_panel.home_alarm
+      state: armed_away
+    - condition: state
+      entity_id: alarm_control_panel.home_alarm
+      state: armed_home
+    - condition: state
+      entity_id: alarm_control_panel.home_alarm
+      state: pending
+  action:
+  - data_template:
+      entity_id: input_boolean.{{ trigger.data.sensor }}_sensor
+    service: input_boolean.turn_on
+  - data_template:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Motion/Fire/CO2 detected
+        by camera - {{ trigger.data.sensor }}.'
+      notification_id: 17
+      title: Security
+    service: persistent_notification.create
+- id: '1571808202390'
+  alias: IFTTT Sensor Off
+  description: ''
+  trigger:
+  - platform: webhook
+    webhook_id: ifttt_sensor_off
+  condition: []
+  action:
+  - data_template:
+      entity_id: input_boolean.{{ trigger.data.sensor }}_sensor
+    service: input_boolean.turn_off
+- id: '1571954936764'
+  alias: Opened Front Door
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.front_door
+    platform: state
+    to: 'on'
+  condition:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: alarm_control_panel.home_alarm
+      state: armed_away
+    - condition: state
+      entity_id: alarm_control_panel.home_alarm
+      state: armed_home
+    - condition: state
+      entity_id: alarm_control_panel.home_alarm
+      state: pending
+  action:
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Front door opened.'
+      notification_id: 8
+      title: Security
+    service: persistent_notification.create
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Front door opened.'
+      title: Security
+    service: notify.pushbullet
+- id: '1571955243056'
+  alias: Opened Front Window
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.front_window
+    platform: state
+    to: 'on'
+  condition:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: alarm_control_panel.home_alarm
+      state: armed_away
+    - condition: state
+      entity_id: alarm_control_panel.home_alarm
+      state: armed_home
+    - condition: state
+      entity_id: alarm_control_panel.home_alarm
+      state: pending
+  action:
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Front window opened.'
+      notification_id: 9
+      title: Security
+    service: persistent_notification.create
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Front window opened.'
+      title: Security
+    service: notify.pushbullet
+- id: '1571955281193'
+  alias: Opened Back Door
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.back_door
+    platform: state
+    to: 'on'
+  condition:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: alarm_control_panel.home_alarm
+      state: armed_away
+    - condition: state
+      entity_id: alarm_control_panel.home_alarm
+      state: armed_home
+    - condition: state
+      entity_id: alarm_control_panel.home_alarm
+      state: pending
+  action:
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Back door opened.'
+      notification_id: 10
+      title: Security
+    service: persistent_notification.create
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Back door opened.'
+      title: Security
+    service: notify.pushbullet
+- id: '1571979929127'
+  alias: Opened Back Window
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.back_window
+    platform: state
+    to: 'on'
+  condition:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: alarm_control_panel.home_alarm
+      state: armed_away
+    - condition: state
+      entity_id: alarm_control_panel.home_alarm
+      state: armed_home
+    - condition: state
+      entity_id: alarm_control_panel.home_alarm
+      state: pending
+  action:
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Back window opened.'
+      notification_id: 11
+      title: Security
+    service: persistent_notification.create
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Back window opened.'
+      title: Security
+    service: notify.pushbullet
+- id: '1571979976516'
+  alias: Motion in Bedroom
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.bedroom_motion
+    platform: state
+    to: 'on'
+  condition:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: alarm_control_panel.home_alarm
+      state: armed_away
+    - condition: state
+      entity_id: alarm_control_panel.home_alarm
+      state: pending
+  action:
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Motion in bedroom.'
+      notification_id: 5
+      title: Security
+    service: persistent_notification.create
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Motion in bedroom.'
+      title: Security
+    service: notify.pushbullet
+- id: '1572223554092'
+  alias: HASS.IO Startup
+  description: ''
+  trigger:
+  - event: start
+    platform: homeassistant
+  condition: []
+  action:
+  - data:
+      name: Google Dark Theme
+    service: frontend.set_theme
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] HASS.IO has started.'
+      title: Security
+    service: notify.pushbullet
+  - data:
+      entity_id: input_text.broadcast_message
+      value: HASS.IO has started.
+    service: input_text.set_value
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] HASS.IO has started.'
+      notification_id: 18
+      title: Security
+    service: persistent_notification.create
+  mode: single
+- id: '1572510223418'
+  alias: MQTT Sunset
+  description: ''
+  trigger:
+  - event: sunset
+    platform: sun
+  condition: []
+  action:
+  - data:
+      payload: '{"sun":"below_horizon"}'
+      topic: alarmpanel/command
+    service: mqtt.publish
+- id: '1572731886699'
+  alias: Siren On
+  description: ''
+  trigger:
+  - entity_id: input_boolean.siren
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: input_boolean.sound
+    state: 'on'
+  action:
+  - data: {}
+    service: script.start_siren
+- id: '1572731932921'
+  alias: Siren Off
+  description: ''
+  trigger:
+  - entity_id: input_boolean.siren
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data: {}
+    service: script.stop_siren
+- id: '1574826847039'
+  alias: Alert That Batteries Are Low
+  description: ''
+  trigger:
+  - event: sunrise
+    platform: sun
+  - event: sunset
+    platform: sun
+  condition:
+  - condition: template
+    value_template: "{% set min_battery_level = 30 -%}\n{% set ns = namespace(found=false)\
+      \ -%}\n{% for entity_id in states.group.battery_levels.attributes.entity_id\
+      \ -%}\n  {% set parts = entity_id.split('.') -%}\n  {% if (states(entity_id)\
+      \ | replace(\"%\",\"\") | int) < min_battery_level -%}\n    {% set ns.found\
+      \ = true -%}\n  {% endif -%}\n{% endfor -%}\n{{ ns.found }}"
+  action:
+  - data:
+      message: "{%- set min_battery_level = 30 -%} {%- for entity_id in states.group.battery_levels.attributes.entity_id\
+        \ -%}\n  {%- set parts = entity_id.split('.') -%}\n  {%- if (states(entity_id)\
+        \ | replace(\"%\",\"\") | int) < min_battery_level -%}\n    {{ states[parts[0]][parts[1]].name\
+        \ }} battery level is {{ states(entity_id) }}%{{ '\\n' }}\n  {%- endif -%}\n\
+        {%- endfor -%}"
+      title: Battery level low!
+    service: notify.pushbullet
+  - data:
+      message: "{%- set min_battery_level = 30 -%} {%- for entity_id in states.group.battery_levels.attributes.entity_id\
+        \ -%}\n  {%- set parts = entity_id.split('.') -%}\n  {%- if (states(entity_id)\
+        \ | replace(\"%\",\"\") | int) < min_battery_level -%}\n    {{ states[parts[0]][parts[1]].name\
+        \ }} battery level is {{ states(entity_id) }}%{{ '\\n' }}\n  {%- endif -%}\n\
+        {%- endfor -%}"
+      notification_id: 19
+      title: Battery level low!
+    service: persistent_notification.create
+- id: '1575776442336'
+  alias: Front Door Locked
+  description: ''
+  trigger:
+  - entity_id: lock.lock_front_door_lock
+    platform: state
+    to: locked
+  condition: []
+  action:
+  - data_template:
+      domain: lock
+      entity_id: lock.lock_front_door_lock
+      message: Front door locked. {{ states.sensor.front_door_report.state}}.
+      name: Front Door Lock
+    service: logbook.log
+  - data:
+      entity_id: automation.front_door_still_kept_unlocked
+    service: automation.turn_off
+- id: '1575776622496'
+  alias: Front Door Unlocked When Alarm is Disarmed
+  description: ''
+  trigger:
+  - entity_id: lock.lock_front_door_lock
+    platform: state
+    to: unlocked
+  condition:
+  - condition: state
+    entity_id: alarm_control_panel.home_alarm
+    state: disarmed
+  action:
+  - data_template:
+      domain: lock
+      entity_id: lock.lock_front_door_lock
+      message: Front door unlocked when alarm is disarmed. {{ states.sensor.front_door_report.state}}.
+      name: Front Door Lock
+    service: logbook.log
+- id: '1575976691502'
+  alias: Front Door Unlocked When Alarm is Armed
+  description: ''
+  trigger:
+  - entity_id: lock.lock_front_door_lock
+    platform: state
+    to: unlocked
+  condition:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: alarm_control_panel.home_alarm
+      state: armed_away
+    - condition: state
+      entity_id: alarm_control_panel.home_alarm
+      state: armed_home
+  action:
+  - data_template:
+      domain: lock
+      entity_id: lock.lock_front_door_lock
+      message: Front door unlocked when alarm is armed. {{ states.sensor.front_door_report.state}}.
+      name: Front Door Lock
+    service: logbook.log
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Front door unlocked when
+        alarm is armed. {{ states.sensor.front_door_report.state}}.'
+      title: Security
+    service: notify.pushbullet
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Front door unlocked when
+        alarm is armed. {{ states.sensor.front_door_report.state}}.'
+      notification_id: 20
+      title: Security
+    service: persistent_notification.create
+  - service: script.disarm
+- id: '1577551540026'
+  alias: Motion in Office
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.office_motion
+    platform: state
+    to: 'on'
+  condition:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: alarm_control_panel.home_alarm
+      state: armed_away
+    - condition: state
+      entity_id: alarm_control_panel.home_alarm
+      state: pending
+  action:
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Motion in office.'
+      notification_id: 23
+      title: Security
+    service: persistent_notification.create
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Motion in office.'
+      title: Security
+    service: notify.pushbullet
+- id: '1577551581566'
+  alias: Motion in Living Room
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.livingroom_motion
+    platform: state
+    to: 'on'
+  condition:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: alarm_control_panel.home_alarm
+      state: armed_away
+    - condition: state
+      entity_id: alarm_control_panel.home_alarm
+      state: pending
+  action:
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Motion in living room.'
+      notification_id: 22
+      title: Security
+    service: persistent_notification.create
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Motion in living room.'
+      title: Security
+    service: notify.pushbullet
+- id: '1578559482907'
+  alias: Front Door Kept Unlocked
+  description: ''
+  trigger:
+  - entity_id: lock.lock_front_door_lock
+    for: 0:15:00
+    platform: state
+    to: unlocked
+  condition: []
+  action:
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Front door kept unlocked.'
+      notification_id: 21
+      title: Security
+    service: persistent_notification.create
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Front door kept unlocked.'
+      title: Security
+    service: notify.pushbullet
+  - data:
+      entity_id: media_player.living_room_speaker
+      message: Front door is unlocked.
+    service: tts.google_translate_say
+  - data:
+      entity_id: automation.front_door_still_kept_unlocked
+    service: automation.turn_on
+- id: '1592287428896'
+  alias: Front Door Still Kept Unlocked
+  description: ''
+  trigger:
+  - minutes: /15
+    platform: time_pattern
+  condition:
+  - condition: state
+    entity_id: lock.lock_front_door_lock
+    state: unlocked
+  action:
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Front door kept unlocked.'
+      notification_id: 21
+      title: Security
+    service: persistent_notification.create
+  - data:
+      message: '[{{now().strftime("%b %d, %Y %I:%M%p")}}] Front door kept unlocked.'
+      title: Security
+    service: notify.pushbullet
+  - data:
+      entity_id: media_player.living_room_speaker
+      message: Front door is unlocked.
+    service: tts.google_translate_say
+- id: '1595713189564'
+  alias: Sony TV Turns On
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.sony_tv
+    platform: state
+    to: 'on'
+  condition: []
+  action:
+  - data:
+      entity_id: switch.soundbar_livingroom
+    entity_id: switch.soundbar_livingroom
+    service: switch.turn_on
+  mode: single
+- id: '1595715011563'
+  alias: Sony TV Turns Off
+  description: ''
+  trigger:
+  - entity_id: binary_sensor.sony_tv
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      entity_id: switch.soundbar_livingroom
+    entity_id: switch.soundbar_livingroom
+    service: switch.turn_off
+  - data:
+      entity_id: switch.tv_backlight_livingroom
+    entity_id: switch.tv_backlight_livingroom
+    service: switch.turn_off
+  mode: single

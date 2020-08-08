@@ -1,0 +1,360 @@
+input_number:
+  balcony_ceiling_brightness:
+    name: Balcony Ceiling Brightness
+    min: 10
+    max: 100
+    initial: 100
+    step: 10
+  balcony_ceiling_brightness_step:
+    name: Balcony Ceiling Brightness Step
+    min: -10
+    max: 10
+    initial: -10
+    step: 0.001
+  balcony_ceiling_mired:
+    name: Balcony Ceiling Mired
+    min: 153
+    max: 500
+    initial: 500
+    step: 34.7
+  balcony_ceiling_mired_step:
+    name: Balcony Ceiling Mired Step
+    min: -34.7
+    max: 34.7
+    initial: -34.7
+    step: 0.001
+  living_room_ceiling_brightness:
+    name: Living Room Ceiling Brightness
+    min: 10
+    max: 100
+    initial: 100
+    step: 10
+  living_room_ceiling_brightness_step:
+    name: Living Room Ceiling Brightness Step
+    min: -10
+    max: 10
+    initial: -10
+    step: 0.001
+  living_room_ceiling_mired:
+    name: Living Room Ceiling Mired
+    min: 153
+    max: 500
+    initial: 500
+    step: 35
+  living_room_ceiling_mired_step:
+    name: Living Room Ceiling Mired Step
+    min: -34.7
+    max: 34.7
+    initial: -34.7
+    step: 0.001
+
+automation:
+  - alias: Remotec ZRC-90 Button 1 Single Press
+    description: ''
+    trigger:
+    - event_data:
+        node_id: 8
+        scene_data: 0
+        scene_id: 1
+      event_type: zwave.scene_activated
+      platform: event
+    condition: []
+    action:
+    - entity_id: light.living_room_ceiling
+      service: light.toggle
+  - alias: Remotec ZRC-90 Button 1 Double Press
+    description: ''
+    trigger:
+    - event_data:
+        node_id: 8
+        scene_data: 3
+        scene_id: 1
+      event_type: zwave.scene_activated
+      platform: event
+    condition:
+    - condition: state
+      entity_id: light.living_room_ceiling
+      state: 'on'
+    action:
+    - data_template:
+        entity_id: input_number.living_room_ceiling_brightness_step
+        value: >-
+          {% set state = states.input_number.living_room_ceiling_brightness.state | int %}
+          {% if state >= 100 %}
+            {% set state = -10 %}
+          {% elif state <= 10 %}
+            {% set state = 10 %}
+          {% else %}
+            {% set state = states.input_number.living_room_ceiling_brightness_step.state | int %}
+          {% endif %}
+          {{ state | int }}
+      entity_id: input_number.living_room_ceiling_brightness_step
+      service: input_number.set_value
+    - data_template:
+        entity_id: input_number.living_room_ceiling_brightness
+        value: >-
+          {% set state = states.input_number.living_room_ceiling_brightness.state | int %}
+          {% if state >= 100 %}
+            {% set state = 90 %}
+          {% elif state <= 10 %}
+            {% set state = 20 %}
+          {% else %}
+            {% set step = states.input_number.living_room_ceiling_brightness_step.state | int %}
+            {% set state = state + step %}
+          {% endif %}
+          {{ state | int }}
+      entity_id: input_number.living_room_ceiling_brightness
+      service: input_number.set_value
+    - data_template:
+        entity_id: light.living_room_ceiling
+        brightness_pct: '{{ states.input_number.living_room_ceiling_brightness.state | int }}'
+      entity_id: light.living_room_ceiling
+      service: light.turn_on
+  - alias: Remotec ZRC-90 Button 1 Long Press
+    description: ''
+    trigger:
+    - event_data:
+        node_id: 8
+        scene_data: 1
+        scene_id: 1
+      event_type: zwave.scene_activated
+      platform: event
+    condition:
+    - condition: state
+      entity_id: light.living_room_ceiling
+      state: 'on'
+    action:
+    - data_template:
+        entity_id: input_number.living_room_ceiling_mired_step
+        value: >-
+          {% set state = states.input_number.living_room_ceiling_mired.state | float %}
+          {% if state >= 500 %}
+            {% set state = -34.7 %}
+          {% elif state <= 153 %}
+            {% set state = 34.7 %}
+          {% else %}
+            {% set state = states.input_number.living_room_ceiling_mired_step.state | float %}
+          {% endif %}
+          {{ state | float }}
+      entity_id: input_number.living_room_ceiling_mired_step
+      service: input_number.set_value
+    - data_template:
+        entity_id: input_number.living_room_ceiling_mired
+        value: >-
+          {% set state = states.input_number.living_room_ceiling_mired.state | float %}
+          {% set step = states.input_number.living_room_ceiling_mired_step.state | float %}
+          {% if (state + step) >= 500 %}
+            {% set state = 500 %}
+          {% elif (state + step) <= 153 %}
+            {% set state = 153 %}
+          {% else %}
+            {% set state = state + step %}
+          {% endif %}
+          {{ state | int }}
+      entity_id: input_number.living_room_ceiling_mired
+      service: input_number.set_value
+    - data_template:
+        entity_id: light.living_room_ceiling
+        color_temp: '{{ states.input_number.living_room_ceiling_mired.state | int }}'
+      entity_id: light.living_room_ceiling
+      service: light.turn_on
+  - alias: Remotec ZRC-90 Button 2 Single Press
+    description: ''
+    trigger:
+    - event_data:
+        node_id: 8
+        scene_data: 0
+        scene_id: 2
+      event_type: zwave.scene_activated
+      platform: event
+    condition: []
+    action:
+    - entity_id: light.living_room_wall
+      service: light.toggle
+  - alias: Remotec ZRC-90 Button 3 Single Press
+    description: ''
+    trigger:
+    - event_data:
+        node_id: 8
+        scene_data: 0
+        scene_id: 3
+      event_type: zwave.scene_activated
+      platform: event
+    condition: []
+    action:
+    - entity_id: switch.light_kitchen_ceiling
+      service: switch.toggle
+  - alias: Remotec ZRC-90 Button 4 Single Press
+    description: ''
+    trigger:
+    - event_data:
+        node_id: 8
+        scene_data: 0
+        scene_id: 4
+      event_type: zwave.scene_activated
+      platform: event
+    condition: []
+    action:
+    - entity_id: switch.light_kitchen_wall
+      service: switch.toggle
+  - alias: Remotec ZRC-90 Button 5 Single Press
+    description: ''
+    trigger:
+    - event_data:
+        node_id: 8
+        scene_data: 0
+        scene_id: 5
+      event_type: zwave.scene_activated
+      platform: event
+    condition: []
+    action:
+    - entity_id: switch.light_office_ceiling
+      service: switch.toggle
+  - alias: Remotec ZRC-90 Button 6 Single Press
+    description: ''
+    trigger:
+    - event_data:
+        node_id: 8
+        scene_data: 0
+        scene_id: 6
+      event_type: zwave.scene_activated
+      platform: event
+    condition: []
+    action:
+    - entity_id: light.office_wall
+      service: light.toggle
+  - alias: Remotec ZRC-90 Button 7 Single Press
+    description: ''
+    trigger:
+    - event_data:
+        node_id: 8
+        scene_data: 0
+        scene_id: 7
+      event_type: zwave.scene_activated
+      platform: event
+    condition: []
+    action:
+    - entity_id: light.balcony_ceiling
+      service: light.toggle
+  - alias: Remotec ZRC-90 Button 7 Double Press
+    description: ''
+    trigger:
+    - event_data:
+        node_id: 8
+        scene_data: 3
+        scene_id: 7
+      event_type: zwave.scene_activated
+      platform: event
+    condition:
+    - condition: state
+      entity_id: light.balcony_ceiling
+      state: 'on'
+    action:
+    - data_template:
+        entity_id: input_number.balcony_ceiling_brightness_step
+        value: >-
+          {% set state = states.input_number.balcony_ceiling_brightness.state | int %}
+          {% if state >= 100 %}
+            {% set state = -10 %}
+          {% elif state <= 10 %}
+            {% set state = 10 %}
+          {% else %}
+            {% set state = states.input_number.balcony_ceiling_brightness_step.state | int %}
+          {% endif %}
+          {{ state | int }}
+      entity_id: input_number.balcony_ceiling_brightness_step
+      service: input_number.set_value
+    - data_template:
+        entity_id: input_number.balcony_ceiling_brightness
+        value: >-
+          {% set state = states.input_number.balcony_ceiling_brightness.state | int %}
+          {% if state >= 100 %}
+            {% set state = 90 %}
+          {% elif state <= 10 %}
+            {% set state = 20 %}
+          {% else %}
+            {% set step = states.input_number.balcony_ceiling_brightness_step.state | int %}
+            {% set state = state + step %}
+          {% endif %}
+          {{ state | int }}
+      entity_id: input_number.balcony_ceiling_brightness
+      service: input_number.set_value
+    - data_template:
+        entity_id: light.balcony_ceiling
+        brightness_pct: '{{ states.input_number.balcony_ceiling_brightness.state | int }}'
+      entity_id: light.balcony_ceiling
+      service: light.turn_on
+  - alias: Remotec ZRC-90 Button 7 Long Press
+    description: ''
+    trigger:
+    - event_data:
+        node_id: 8
+        scene_data: 1
+        scene_id: 7
+      event_type: zwave.scene_activated
+      platform: event
+    condition:
+    - condition: state
+      entity_id: light.balcony_ceiling
+      state: 'on'
+    action:
+    - data_template:
+        entity_id: input_number.balcony_ceiling_mired_step
+        value: >-
+          {% set state = states.input_number.balcony_ceiling_mired.state | float %}
+          {% if state >= 500 %}
+            {% set state = -34.7 %}
+          {% elif state <= 153 %}
+            {% set state = 34.7 %}
+          {% else %}
+            {% set state = states.input_number.balcony_ceiling_mired_step.state | float %}
+          {% endif %}
+          {{ state | float }}
+      entity_id: input_number.balcony_ceiling_mired_step
+      service: input_number.set_value
+    - data_template:
+        entity_id: input_number.balcony_ceiling_mired
+        value: >-
+          {% set state = states.input_number.balcony_ceiling_mired.state | float %}
+          {% set step = states.input_number.balcony_ceiling_mired_step.state | float %}
+          {% if (state + step) >= 500 %}
+            {% set state = 500 %}
+          {% elif (state + step) <= 153 %}
+            {% set state = 153 %}
+          {% else %}
+            {% set state = state + step %}
+          {% endif %}
+          {{ state | int }}
+      entity_id: input_number.balcony_ceiling_mired
+      service: input_number.set_value
+    - data_template:
+        entity_id: light.balcony_ceiling
+        color_temp: '{{ states.input_number.balcony_ceiling_mired.state | int }}'
+      entity_id: light.balcony_ceiling
+      service: light.turn_on
+  - alias: Remotec ZRC-90 Button 8 Single Press
+    description: ''
+    trigger:
+    - event_data:
+        node_id: 8
+        scene_data: 0
+        scene_id: 8
+      event_type: zwave.scene_activated
+      platform: event
+    condition: []
+    action:
+    - entity_id: switch.light_bedroom_ceiling
+      service: switch.toggle
+  - alias: Remotec ZRC-90 Button 8 Double Press
+    description: ''
+    trigger:
+    - event_data:
+        node_id: 8
+        scene_data: 3
+        scene_id: 8
+      event_type: zwave.scene_activated
+      platform: event
+    condition: []
+    action:
+    - entity_id: light.bedroom_wall
+      service: light.toggle
