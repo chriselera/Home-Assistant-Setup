@@ -33,9 +33,9 @@
   <li>Google Home</li>
 </ul>
 
-<h4>Alarm Panel</h4>
+<h4>Wall-mounted Alarm Panel</h4>
 <ul>
-  <li>Wall mounted Amazon Fire HD 8</li>
+  <li>Amazon Fire HD 8</li>
   <li>Fully Kiosk Browser</li>
   <li>Android Alarm Panel for Home Assistant</li>
 <ul>
