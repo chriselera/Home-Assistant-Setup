@@ -1,0 +1,560 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+#customize
+homeassistant:
+  customize: !include customize.yaml
+  packages: !include_dir_named packages
+
+#themes
+frontend:
+   themes: !include_dir_merge_named themes
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+# ifttt
+ifttt:
+  key: !secret ifttt_key
+
+# Example configuration.yaml entry
+asuswrt:
+  host: 192.168.0.1
+  username: !secret asuswrt_username
+  ssh_key: /config/ssh/ssh_asus_private_key
+  sensors:
+    - devices
+    - upload
+    - download
+    - upload_speed
+    - download_speed
+    
+# mqtt alarm
+alarm_control_panel:
+  - platform: manual_mqtt
+    name: Home Alarm
+    code: !secret alarm_code
+    code_arm_required: false
+    state_topic: home/alarm
+    command_topic: home/alarm/set
+    pending_time: 30
+    delay_time: 30
+    trigger_time: 4
+    disarmed:
+      trigger_time: 0
+    #armed_home:
+    #  pending_time: 0
+    #  delay_time: 0
+    triggered:
+      pending_time: 0
+
+#Google Assistant Broadcast
+notify:
+  - name: Google Assistant
+    platform: rest
+    resource: http://xxx.xxx.xxx.xxx:nnnn/broadcast_message
+  - platform: pushbullet
+    name: pushbullet
+    api_key: !secret pushbullet_api_key
+
+shell_command:
+  zwave_disco_off: echo -e -n "\x01\x08\x00\xF2\x51\x01\x00\x05\x01\x51" > /dev/serial/by-id/usb-0658_0200-if00
+  zwave_disco_on: echo -e -n "\x01\x08\x00\xF2\x51\x01\x01\x05\x01\x50" > /dev/serial/by-id/usb-0658_0200-if00
+
+light:
+  - platform: group
+    name: Living Room Ceiling
+    entities:
+      - light.living_room_ceiling_1
+      - light.living_room_ceiling_2
+      - light.living_room_ceiling_3
+
+media_player:
+  # Use an ADB server for sending ADB commands
+  - platform: androidtv
+    name: Sony TV
+    host: xxx.xxx.xxx.xxx
+    adb_server_ip: 127.0.0.1
+    exclude_unnamed_apps: true
+    apps:
+      com.google.android.tvlauncher: "Android TV Launcher"
+      com.sony.dtv.tvx: "Cignal/Roku/DVD"
+      com.netflix.ninja: "Netflix"
+      ru.itkey.android.xplay: "XPlay"
+      com.google.android.youtube.tv: "YouTube"
+      com.hbo.asia.androidtv: "HBO Go"
+      iflix.play: "iFlix"
+      com.cbsnews.ott: "CBS News"
+      com.vewd.core.integration.dia: "Internet"
+      com.plexapp.android: "Plex"
+
+input_boolean:
+  sound:
+    name: Sound
+    initial: off
+    icon: mdi:bell
+  cameras:
+    name: Cameras
+    initial: off
+    icon: mdi:camera
+  notifications:
+    name: Notifications
+    initial: off
+    icon: mdi:bell
+  socket_1:
+    name: Socket 1
+    initial: off
+    icon: mdi:power-socket-us
+  socket_2:
+    name: Socket 2
+    initial: off
+    icon: mdi:power-socket-us
+  socket_3:
+    name: Socket 3
+    initial: off
+    icon: mdi:power-socket-us
+  fire_sensor:
+    name: Fire
+    initial: off
+    icon: mdi:fire
+  co2_sensor:
+    name: CO2
+    initial: off
+    icon: mdi:molecule-co2
+  siren:
+    name: Siren
+    initial: off
+    icon: mdi:alarm-bell
+  fake_heater_indoor:
+    name: Fake Heater Indoor
+    icon: mdi:toggle-switch-off
+    initial: off
+  fake_heater_outdoor:
+    name: Fake Heater Outdoor
+    icon: mdi:toggle-switch-off
+    initial: off
+
+input_text:
+  broadcast_message:
+    name: Broadcast Message
+  alarm_mode:
+    name: Alarm Mode
+
+climate:
+  - platform: generic_thermostat
+    name: Indoor Temperature
+    heater: input_boolean.fake_heater_indoor
+    target_sensor: sensor.temperature_indoor
+    initial_hvac_mode: "off"
+    target_temp: 21
+  - platform: generic_thermostat
+    name: Outdoor Temperature
+    heater: input_boolean.fake_heater_outdoor
+    target_sensor: sensor.temperature_outdoor
+    initial_hvac_mode: "off"
+    target_temp: 21
+
+sensor:
+  - platform: uptime
+    name: "HA runtime in days"
+    unit_of_measurement: days
+  - platform: time_date
+    display_options:
+      - 'date_time'
+  - platform: broadlink
+    scan_interval: 60
+    host: xxx.xxx.xxx.xxx
+    mac: 'xx:xx:xx:xx:xx:xx'
+  - platform: mqtt
+    name: Amazon Fire Battery
+    state_topic: alarmpanel/sensor/battery
+    unit_of_measurement: '%'
+    value_template: '{{value_json.value}}'
+    json_attributes_topic: alarmpanel_fire/sensor/battery
+    json_attributes_template: "{{ value_json | tojson }}"
+  - platform: mqtt
+    name: CPU Temp
+    state_topic: telegraf/xxx.xxx.xxx.xxx/sensors
+    unit_of_measurement: '°C'
+    value_template: '{{value_json.fields.temp_input}}'
+    json_attributes_topic: telegraf/xxx.xxx.xxx.xxx/sensors
+    json_attributes_template: "{{ value_json | tojson }}"
+  - platform: systemmonitor
+    resources:
+      - type: processor_use
+      - type: memory_use_percent
+      - type: disk_use_percent
+        arg: /home
+  - platform: template
+    sensors:
+      sound:
+        friendly_name: "Sound"
+        value_template: >-
+          {% if is_state('input_boolean.sound', 'on') %}
+            on
+          {% else %}
+            off
+          {% endif %}
+        entity_picture_template: >-
+          {% if is_state('input_boolean.sound', 'on') %}
+            /local/images/sound-on.png
+          {% else %}
+            /local/images/sound-off.png
+          {% endif %}
+      notifications_monitoring:
+        friendly_name: "Notifications"
+        value_template: >-
+          {% if is_state('input_boolean.notifications', 'on') %}
+            on
+          {% else %}
+            off
+          {% endif %}
+        entity_picture_template: >-
+          {% if is_state('input_boolean.notifications', 'on') %}
+            /local/images/bell-on.png
+          {% else %}
+            /local/images/bell-off.png
+          {% endif %}
+      cameras:
+        friendly_name: "Cameras"
+        value_template: >-
+          {% if is_state('input_boolean.cameras', 'on') %}
+            on
+          {% else %}
+            off
+          {% endif %}
+        entity_picture_template: >-
+          {% if is_state('input_boolean.cameras', 'on') %}
+            /local/images/camera-on.png
+          {% else %}
+            /local/images/camera-off.png
+          {% endif %}
+      fire_sensor:
+        friendly_name: "Fire"
+        value_template: >-
+          {% if is_state('input_boolean.fire_sensor', 'on') %}
+            on
+          {% else %}
+            off
+          {% endif %}
+        entity_picture_template: >-
+          {% if is_state('input_boolean.fire_sensor', 'on') %}
+            /local/images/fire-on.png
+          {% else %}
+            /local/images/fire-off.png
+          {% endif %}
+      co2_sensor:
+        friendly_name: "CO2"
+        value_template: >-
+          {% if is_state('input_boolean.co2_sensor', 'on') %}
+            on
+          {% else %}
+            off
+          {% endif %}
+        entity_picture_template: >-
+          {% if is_state('input_boolean.co2_sensor', 'on') %}
+            /local/images/co2-on.png
+          {% else %}
+            /local/images/co2-off.png
+          {% endif %}
+      amazon_fire_battery_level:
+        friendly_name_template: Amazon Fire ({% if states.sensor.amazon_fire_battery.attributes['charging'] %}Charging{% else %}Not charging{% endif %}, {% if states.sensor.amazon_fire_battery.attributes['acPlugged'] %}Plugged-in{% else %}Not plugged-in{% endif %})
+        unit_of_measurement: '%'
+        value_template: '{{ states.sensor.amazon_fire_battery.state|int }}'
+        entity_picture_template: >-
+          {% set battery_level = states.sensor.amazon_fire_battery.state|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          {% set battery_charging = states.sensor.amazon_fire_battery.attributes["charging"] %}
+          {% if battery_charging %}
+            /local/images/battery-charging-{{ battery_round }}.png
+          {% else %}
+            /local/images/battery-{{ battery_round }}.png
+          {% endif %}
+        icon_template: >
+          {% set battery_level = states.sensor.amazon_fire_battery.state|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          {% set battery_charging = states.sensor.amazon_fire_battery.attributes["charging"] %}
+          {% if battery_charging %}
+            /local/images/battery-charging-{{ battery_round }}.png
+          {% else %}
+            /local/images/battery-{{ battery_round }}.png
+          {% endif %}
+      front_door_sensor_battery_level:
+        friendly_name: Front Door Sensor
+        unit_of_measurement: '%'
+        value_template: '{{ states.binary_sensor.front_door.attributes["battery_level"]|default(0)|int }}'
+        entity_picture_template: >-
+          {% set battery_level = states.binary_sensor.front_door.attributes["battery_level"]|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+        icon_template: >
+          {% set battery_level = states.sensor.front_door.state|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+      front_window_sensor_battery_level:
+        friendly_name: Front Window Sensor
+        unit_of_measurement: '%'
+        value_template: '{{ states.binary_sensor.front_window.attributes["battery_level"]|default(0)|int }}'
+        entity_picture_template: >-
+          {% set battery_level = states.binary_sensor.front_window.attributes["battery_level"]|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+        icon_template: >
+          {% set battery_level = states.sensor.front_window.state|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+      kitchen_window_sensor_battery_level:
+        friendly_name: Kitchen Window Sensor
+        unit_of_measurement: '%'
+        value_template: '{{ states.binary_sensor.kitchen_window.attributes["battery_level"]|default(0)|int }}'
+        entity_picture_template: >-
+          {% set battery_level = states.binary_sensor.kitchen_window.attributes["battery_level"]|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+        icon_template: >
+          {% set battery_level = states.sensor.kitchen_window.state|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+      back_door_sensor_battery_level:
+        friendly_name: Back Door Sensor
+        unit_of_measurement: '%'
+        value_template: '{{ states.binary_sensor.back_door.attributes["battery_level"]|default(0)|int }}'
+        entity_picture_template: >-
+          {% set battery_level = states.binary_sensor.back_door.attributes["battery_level"]|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+        icon_template: >
+          {% set battery_level = states.sensor.back_door.state|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+      back_window_sensor_battery_level:
+        friendly_name: Back Window Sensor
+        unit_of_measurement: '%'
+        value_template: '{{ states.binary_sensor.back_window.attributes["battery_level"]|default(0)|int }}'
+        entity_picture_template: >-
+          {% set battery_level = states.binary_sensor.back_window.attributes["battery_level"]|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+        icon_template: >
+          {% set battery_level = states.sensor.back_window.state|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+      bedroom_door_sensor_battery_level:
+        friendly_name: Bedroom Sensor
+        unit_of_measurement: '%'
+        value_template: '{{ states.binary_sensor.bedroom_door.attributes["battery_level"]|default(0)|int }}'
+        entity_picture_template: >-
+          {% set battery_level = states.binary_sensor.bedroom_door.attributes["battery_level"]|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+        icon_template: >
+          {% set battery_level = states.sensor.bedroom_door.state|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+      livingroom_motion_sensor_battery_level:
+        friendly_name: Living Room Motion Sensor
+        unit_of_measurement: '%'
+        value_template: '{{ states.binary_sensor.livingroom_motion.attributes["battery_level"]|default(0)|int }}'
+        entity_picture_template: >-
+          {% set battery_level = states.binary_sensor.livingroom_motion.attributes["battery_level"]|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+        icon_template: >
+          {% set battery_level = states.sensor.livingroom_motion.state|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+      office_motion_sensor_battery_level:
+        friendly_name: Office Motion Sensor
+        unit_of_measurement: '%'
+        value_template: '{{ states.binary_sensor.office_motion.attributes["battery_level"]|default(0)|int }}'
+        entity_picture_template: >-
+          {% set battery_level = states.binary_sensor.office_motion.attributes["battery_level"]|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+        icon_template: >
+          {% set battery_level = states.sensor.office_motion.state|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+      bedroom_motion_sensor_battery_level:
+        friendly_name: Bedroom Motion Sensor
+        unit_of_measurement: '%'
+        value_template: '{{ states.binary_sensor.bedroom_motion.attributes["battery_level"]|default(0)|int }}'
+        entity_picture_template: >-
+          {% set battery_level = states.binary_sensor.bedroom_motion.attributes["battery_level"]|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+        icon_template: >
+          {% set battery_level = states.sensor.bedroom_motion.state|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+      indoor_sensor_battery_level:
+        friendly_name: Indoor Sensor
+        unit_of_measurement: '%'
+        value_template: '{{ states.sensor.indoor_battery_level.state|default(0)|int }}'
+        entity_picture_template: >-
+          {% set battery_level = states.sensor.indoor_battery_level.state|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+        icon_template: >
+          {% set battery_level = states.sensor.indoor_battery_level.state|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+      outdoor_sensor_battery_level:
+        friendly_name: Outdoor Sensor
+        unit_of_measurement: '%'
+        value_template: '{{ states.sensor.outdoor_battery_level.state|default(0)|int }}'
+        entity_picture_template: >-
+          {% set battery_level = states.sensor.outdoor_battery_level.state|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+        icon_template: >
+          {% set battery_level = states.sensor.outdoor_battery_level.state|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+      remotec_zrc90_switch_battery_level:
+        friendly_name: Remotec ZRC-90 Switch
+        unit_of_measurement: '%'
+        value_template: '{{ states.sensor.remotec_zrc90_battery_level.state|default(0)|int }}'
+        entity_picture_template: >-
+          {% set battery_level = states.sensor.remotec_zrc90_battery_level.state|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+        icon_template: >
+          {% set battery_level = states.sensor.remotec_zrc90_battery_level.state|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+      smart_switch_1_switch_battery_level:
+        friendly_name: Smart Switch 1
+        unit_of_measurement: '%'
+        value_template: '{{ states.sensor.smart_switch_1_battery_level.state|default(0)|int }}'
+        entity_picture_template: >-
+          {% set battery_level = states.sensor.smart_switch_1_battery_level.state|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+        icon_template: >
+          {% set battery_level = states.sensor.smart_switch_1_battery_level.state|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+      smart_switch_2_switch_battery_level:
+        friendly_name: Smart Switch 2
+        unit_of_measurement: '%'
+        value_template: '{{ states.sensor.smart_switch_2_battery_level.state|default(0)|int }}'
+        entity_picture_template: >-
+          {% set battery_level = states.sensor.smart_switch_2_battery_level.state|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+        icon_template: >
+          {% set battery_level = states.sensor.smart_switch_2_battery_level.state|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+      smart_switch_3_switch_battery_level:
+        friendly_name: Smart Switch 3
+        unit_of_measurement: '%'
+        value_template: '{{ states.sensor.smart_switch_3_battery_level.state|default(0)|int }}'
+        entity_picture_template: >-
+          {% set battery_level = states.sensor.smart_switch_3_battery_level.state|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+        icon_template: >
+          {% set battery_level = states.sensor.smart_switch_3_battery_level.state|default(0)|int %}
+          {% set battery_round = (battery_level / 10) |int * 10 %}
+          /local/images/battery-{{ battery_round }}.png
+  - platform: google_geocode
+    origin: device_tracker.xxxxxxxxxx_s10
+    name: Chris
+    options: street_number, street, city
+    display_zone: hide
+    api_key: !secret google_maps_api_key
+    language: en-US
+    region: US
+  - platform: google_geocode
+    origin: device_tracker.xxxxxxxxxx_s7
+    name: Christopher
+    options: street_number, street, city
+    display_zone: hide
+    api_key: !secret google_maps_api_key
+    language: en-US
+    region: US
+  - platform: google_geocode
+    origin: device_tracker.house_keys
+    name: House Keys
+    options: street_number, street, city
+    display_zone: hide
+    api_key: !secret google_maps_api_key
+    language: en-US
+    region: US
+  - platform: google_geocode
+    origin: device_tracker.car_keys
+    name: Car Keys
+    options: street_number, street, city
+    display_zone: hide
+    api_key: !secret google_maps_api_key
+    language: en-US
+    region: US
+  - platform: google_geocode
+    origin: device_tracker.car_keys_spare
+    name: Car Keys Spare
+    options: street_number, street, city
+    display_zone: hide
+    api_key: !secret google_maps_api_key
+    language: en-US
+    region: US
+
+binary_sensor:
+  - platform: wyzesense
+    device: auto
+  - platform: template
+    sensors:
+      sony_tv:
+        friendly_name: "Sony TV"
+        value_template: "{{ not is_state('media_player.sony_tv', 'off') }}"
+        device_class: power
+
+owntracks:
+  max_gps_accuracy: 100
+
+weather:
+  - platform: darksky
+    api_key: !secret dark_sky_api_key
+
+logger:
+  default: info
+  #logs:
+  #  custom_components.wyzesense: debug
+  #  wyzesense.gateway: debug
+  #  homeassistant.components.zwave: debug
+  #  homeassistant.components.deconz: debug
+
+logbook:
+  exclude:
+    entities:
+      - binary_sensor.back_door
+      - binary_sensor.back_window
+      - binary_sensor.bedroom_door
+      - binary_sensor.bedroom_motion
+      - binary_sensor.front_door
+      - binary_sensor.front_window
+      - binary_sensor.kitchen_window
+      - binary_sensor.livingroom_motion
+      - binary_sensor.office_motion
+      - group.motion
+      - group.sensors
+      - sensor.date_time
+      - sensor.sm_g973f_battery_level
+      - sensor.sm_g973f_battery_state
+      - sensor.sm_g973f_wifi_connection
+    domains:
+      - device_tracker
+      - light
+      - switch
+
+recorder:
+  db_url: !secret mariadb
+  purge_keep_days: 3
+  
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+zone: !include zones.yaml
