@@ -56,4 +56,8 @@
 ![alt text](https://github.com/chriselera/Home-Assistant-Setup/blob/master/Screenshots/012-Ent2.png?raw=true)
 ![alt text](https://github.com/chriselera/Home-Assistant-Setup/blob/master/Screenshots/013-Ent1.png?raw=true)
 ![alt text](https://github.com/chriselera/Home-Assistant-Setup/blob/master/Screenshots/014-AC.png?raw=true)
+![alt text](https://github.com/chriselera/Home-Assistant-Setup/blob/master/Screenshots/015-Integrations.png?raw=true)
+![alt text](https://github.com/chriselera/Home-Assistant-Setup/blob/master/Screenshots/016-Add-ons.png?raw=true)
+![alt text](https://github.com/chriselera/Home-Assistant-Setup/blob/master/Screenshots/017-HACSIntegrations.png?raw=true)
+![alt text](https://github.com/chriselera/Home-Assistant-Setup/blob/master/Screenshots/018-HACSFrontend.png?raw=true)
 
