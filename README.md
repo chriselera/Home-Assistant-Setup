@@ -33,6 +33,13 @@
   <li>Google Home</li>
 </ul>
 
+<h4>Alarm Panel</h4>
+<ul>
+  <li>Wall mounted Amazon Fire HD 8</li>
+  <li>Fully Kiosk Browser</li>
+  <li>Android Alarm Panel for Home Assistant</li>
+<ul>
+  
 <h3>Screenshots</h3>
 
 ![alt text](https://github.com/chriselera/Home-Assistant-Setup/blob/master/Screenshots/001-AlarmPanel.png?raw=true)
