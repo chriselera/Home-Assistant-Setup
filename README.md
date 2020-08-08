@@ -16,7 +16,7 @@
 <ul>
   <li>Aqara Tuneable White Smart Bulb ZNLDP12LM</li>
   <li>eWeLink ZigBee Smart Plug SA-003</li>
-  <li>Aqara Temperature, Humidity, and Atmospheric Pressure Sensor WSDCGQ11LM</li>
+  <li>Aqara Temperature, Humidity, and Atmospheric Pressure Sensors WSDCGQ11LM</li>
 </ul>
 
 <h4>Zwave Devices</h4>
@@ -28,7 +28,8 @@
 <h4>Others</h4>
 <ul>
   <li>Broadlink RM Pro</li>
-  <li>Wyze Cam Pan, Cam V2, and Contact and Motion Sensors</li>
+  <li>Broadlink TC1 and TC2 Smart Switch</li>
+  <li>Wyze Cam Pan, Cam V2, and Contact and Motion Sensor</li>
   <li>Google Home</li>
 </ul>
 
