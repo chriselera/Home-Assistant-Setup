@@ -1,5 +1,5 @@
 # Home-Assistant-Setup
-<h1>Personal Home Assistant Setup</h1>
+
 
 <h3>Screenshots</h3>
 
