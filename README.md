@@ -38,7 +38,7 @@
   <li>Amazon Fire HD 8</li>
   <li>Fully Kiosk Browser</li>
   <li>Android Alarm Panel for Home Assistant</li>
-<ul>
+</ul>
   
 <h3>Screenshots</h3>
 
