@@ -17,6 +17,7 @@
   <li>Aqara Tuneable White Smart Bulb ZNLDP12LM</li>
   <li>eWeLink ZigBee Smart Plug SA-003</li>
   <li>Aqara Temperature, Humidity, and Atmospheric Pressure Sensors WSDCGQ11LM</li>
+  <li>Aqara Smart Switch (WXKG12LM)</li>
 </ul>
 
 <h4>Zwave Devices</h4>
